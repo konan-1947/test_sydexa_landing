@@ -1,0 +1,15 @@
+.border-block {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid;
+  border-image-slice: 1;
+  border-width: 1px;
+  border-image-source: linear-gradient(
+    99.23deg,
+    rgba(102, 102, 104, 0.36) 11.67%,
+    rgba(180, 180, 180, 0.108) 39.59%,
+    rgba(243, 243, 243, 0.216) 69.06%,
+    rgba(167, 167, 168, 0.036) 92.33%
+  );
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: intersect;
+}
