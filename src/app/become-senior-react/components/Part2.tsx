@@ -9,7 +9,7 @@ const Part2 = () => {
       <div className="text-center text-4xl mt-[17px] font-semibold leading-tight bg-gradient-to-b from-[#2EC5E4] to-[#E9EBF0] text-transparent bg-clip-text">
         Trải nghiệm học tập <br /> cá nhân hóa <br /> linh hoạt & thực chiến.
       </div>
-      <div className="w-full h-full relative flex justify-center items-start pt-18">
+      <div className="w-full h-full relative flex justify-center items-start pt-17">
         <div className="container mx-auto relative z-10">
           <div className="first-block relative overflow-hidden rounded-2xl">
             <BorderComponent>
