@@ -11,7 +11,7 @@ const Part2 = () => {
       </div>
       <div className="w-full h-full relative flex justify-center items-start pt-17">
         <div className="container mx-auto relative z-10">
-          <div className="first-block relative overflow-hidden rounded-2xl">
+          <div className="first-block relative overflow-hidden rounded-2xl mb-4">
             <BorderComponent>
               <div className="flex w-full px-5 pt-5 pb-3">
                 <div className="w-1/2 px-5 pt-5 pb-2">
@@ -38,6 +38,32 @@ const Part2 = () => {
                 </div>
               </div>
             </BorderComponent>
+          </div>
+          <div className="-ml-2 flex flex-wrap -mr-2">
+            <div className="mb-4 w-1/3 px-2">
+              <BorderComponent className="min-h-64 h-full flex items-center justify-center">
+                BLOCK 2
+              </BorderComponent>
+            </div>
+            <div className="mb-4 w-2/3 px-2">
+              <div className="-ml-2 -mr-2  flex flex-wrap">
+                <div className="mb-4 w-1/2 px-2">
+                  <BorderComponent className="h-32 flex items-center justify-center">
+                    BLOCK 3
+                  </BorderComponent>
+                </div>
+                <div className="mb-4 w-1/2 px-2">
+                  <BorderComponent className="h-32 flex items-center justify-center">
+                    BLOCK 4
+                  </BorderComponent>
+                </div>
+                <div className="w-full px-2">
+                  <BorderComponent className="h-32 flex items-center justify-center">
+                    BLOCK 5
+                  </BorderComponent>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
