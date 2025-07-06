@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 
-interface SvgIconOptimizedProps {
-  /** Tên file SVG (không cần đuôi .svg) */
+interface ImageOptimizedProps {
+  /** Tên file Image (không cần đuôi .jpg, .png, .webp) */
   name: string;
-  /** Kích thước icon (width và height) - phải là number */
+  /** Kích thước image (width và height) - phải là number */
   size?: number;
   /** Width tùy chỉnh (ghi đè size) */
   width?: number;
@@ -12,24 +12,20 @@ interface SvgIconOptimizedProps {
   height?: number;
   /** CSS className tùy chỉnh */
   className?: string;
-  /** Alt text cho accessibility */
-  alt?: string;
   /** Priority loading cho Next.js Image */
   priority?: boolean;
-  /** Props khác cho Next.js Image */
   [key: string]: string | number | boolean | undefined;
-  type?: 'svg' | 'jpg' | 'png';
+  type?: 'jpg' | 'png' | 'webp' ;
 }
 
-const SvgIcon: React.FC<SvgIconOptimizedProps> = ({
+const ImageOptimized: React.FC<ImageOptimizedProps> = ({
   name,
   size = 24,
   width,
   height,
   className = '',
-  alt,
   priority = false,
-  type = 'svg',
+  type = 'jpg',
   ...props
 }) => {
   // Xử lý kích thước
@@ -37,16 +33,13 @@ const SvgIcon: React.FC<SvgIconOptimizedProps> = ({
   const finalHeight = height || size;
   
   // Tạo đường dẫn đến file SVG
-  const iconPath = `/icons/${name}.${type}`;
+  const iconPath = `/images/${name}.${type}`;
   console.log(iconPath);
   
-  // Alt text mặc định
-  const altText = alt || `${name} icon`;
-
   return (
     <Image
       src={iconPath}
-      alt={altText}
+      alt={name}
       width={finalWidth}
       height={finalHeight}
       priority={priority}
@@ -56,4 +49,4 @@ const SvgIcon: React.FC<SvgIconOptimizedProps> = ({
   );
 };
 
-export default SvgIcon; 
+export default ImageOptimized; 
