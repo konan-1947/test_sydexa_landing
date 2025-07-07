@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Part1 from "./components/Part1";
 import SvgIconOptimized from "@/app/components/SvgIconOptimized";
 import Part2 from "./components/Part2";
+import GiangVien from "./components/GiangVien";
 
 const BecomeSeniorReactPage = () => {
   return (
@@ -27,7 +28,7 @@ const BecomeSeniorReactPage = () => {
         <SvgIconOptimized className="w-full" name="ScrollLine1" />
       </div>
       <Part2 />
-      <div className="h-screen w-screen"></div>
+      <GiangVien />
     </div>
   );
 };

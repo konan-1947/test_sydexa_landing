@@ -14,18 +14,19 @@ interface ImageOptimizedProps {
   className?: string;
   /** Priority loading cho Next.js Image */
   priority?: boolean;
-  [key: string]: string | number | boolean | undefined;
-  type?: 'jpg' | 'png' | 'webp' ;
+  type?: 'jpg' | 'png' | 'webp' | 'svg';
+  style?: React.CSSProperties;
 }
 
 const ImageOptimized: React.FC<ImageOptimizedProps> = ({
   name,
-  size = 24,
+  size = 96,
   width,
   height,
   className = '',
   priority = false,
   type = 'jpg',
+  style,
   ...props
 }) => {
   // Xử lý kích thước
@@ -44,6 +45,7 @@ const ImageOptimized: React.FC<ImageOptimizedProps> = ({
       height={finalHeight}
       priority={priority}
       className={`inline-block ${className}`}
+      style={style}
       {...props}
     />
   );

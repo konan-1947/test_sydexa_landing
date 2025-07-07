@@ -29,26 +29,26 @@ const Part1 = () => {
       </div>
       <div className="w-2/3 h-full flex items-center justify-center">
         <div className="w-full h-full flex justify-start">
-          <ModelViewer
-            url="/images/model.glb"
+          {/* <ModelViewer
+            url="/images/model2.glb"
             autoRotate={true}
             showScreenshotButton={false}
             width="100%"
-            height="70%"
-            defaultZoom={10}
+            height="100%"
+            defaultZoom={600}
             autoFrame={false}
             minZoomDistance={0.02}
             maxZoomDistance={3}
             defaultRotationX={-20}
-            defaultRotationY={15}
+            defaultRotationY={30}
             modelXOffset={0}
-            modelYOffset={0.9}
+            modelYOffset={0.1}
             enableMouseParallax={false}
             enableHoverRotation={false}
             enableManualRotation={false}
             enableManualZoom={false}
             enableOrbitControls={true}
-          />
+          /> */}
         </div>
       </div>
     </div>

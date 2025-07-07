@@ -1,6 +1,10 @@
 import "./border.scss";
 
-const BorderComponent = (prop: any) => {
+interface BorderComponentProps {
+  children: React.ReactNode;
+  className?: string;
+}
+const BorderComponent = (prop: BorderComponentProps) => {
   return (
     <div
       className={
