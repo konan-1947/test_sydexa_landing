@@ -3,13 +3,14 @@ import ImageOptimized from "@/app/components/ImageOptimized";
 import StyledButton1 from "@/app/components/StyledButton1";
 import SvgIconOptimized from "@/app/components/SvgIconOptimized";
 import "./path2.scss";
+import HeaderBlockComponent from "@/app/components/header-block/HeaderBlock";
 const Part2 = () => {
   return (
     <div className="w-full flex flex-col justify-start items-center h-fit relative z-10">
       <StyledButton1 text="Hình thức học" />
-      <div className="text-center text-4xl mt-[17px] font-semibold leading-tight bg-gradient-to-b from-[#2EC5E4] to-[#E9EBF0] text-transparent bg-clip-text">
+      <HeaderBlockComponent className="mt-4">
         Trải nghiệm học tập <br /> cá nhân hóa <br /> linh hoạt & thực chiến.
-      </div>
+      </HeaderBlockComponent>
       <div className="w-full h-fit relative flex justify-center items-start pt-17">
         <div className="container mx-auto relative z-10">
           <div className=" relative overflow-hidden rounded-2xl mb-4">
@@ -45,8 +46,7 @@ const Part2 = () => {
                       background: `linear-gradient(135deg, #5050DD 0%, #FC80B6 100%)`,
                       borderRadius: "40px",
                       border: "none",
-                    }}
-                  >
+                    }}>
                     Xem nội dung khóa học
                   </button>
                 </div>
@@ -291,7 +291,8 @@ const Part2 = () => {
                         style={{
                           zIndex: -1,
                           mask: "radial-gradient(ellipse 80% 80% at center, black 20%, transparent 70%)",
-                          WebkitMask: "radial-gradient(ellipse 80% 80% at center, black 20%, transparent 70%)",
+                          WebkitMask:
+                            "radial-gradient(ellipse 80% 80% at center, black 20%, transparent 70%)",
                         }}
                       />
                     </div>
