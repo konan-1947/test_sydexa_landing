@@ -93,7 +93,7 @@ const TestimonialComponent = () => {
             spaceBetween: 70,
           },
         }}
-        // modules={[Autoplay]}
+        modules={[Autoplay]}
         centeredSlides={true}>
         {testimonialData.map((item, index) => (
           <SwiperSlide className="h-auto" key={index + ""}>
