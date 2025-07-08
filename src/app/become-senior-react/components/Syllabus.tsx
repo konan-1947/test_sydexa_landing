@@ -1,9 +1,8 @@
 import HeaderBlockComponent from "@/app/components/header-block/HeaderBlock";
 import StyledButton1 from "@/app/components/StyledButton1";
+import SvgIconOptimized from "@/app/components/SvgIconOptimized";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
 import "./accordion.scss";
-import BorderComponent from "@/app/components/border/border";
-import SvgIconOptimized from "@/app/components/SvgIconOptimized";
 const Syllabus = () => {
   const syllabusData = [
     {

@@ -5,6 +5,7 @@ import SvgIconOptimized from "@/app/components/SvgIconOptimized";
 import Part2 from "./components/Part2";
 import GiangVien from "./components/GiangVien";
 import Syllabus from "./components/Syllabus";
+import TestimonialComponent from "./Testimonial/Testimonial";
 
 const BecomeSeniorReactPage = () => {
   return (
@@ -31,6 +32,7 @@ const BecomeSeniorReactPage = () => {
       <Part2 />
       <GiangVien />
       <Syllabus />
+      <TestimonialComponent />
     </div>
   );
 };
