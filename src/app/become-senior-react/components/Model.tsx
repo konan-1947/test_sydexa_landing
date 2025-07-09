@@ -81,7 +81,7 @@ const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
 // Ultra-optimized performance presets (maximum battery efficiency)
 const PERFORMANCE_SETTINGS = {
   low: { 
-    targetFPS: 15, // Ultra-low FPS for maximum battery savings - perfect for 0.03 rotation
+    targetFPS: 1, // Ultra-low FPS for maximum battery savings - perfect for 0.03 rotation
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.25), // Slight increase for sharpness
     shadows: false,
     antialias: true // Enable antialiasing for smoother edges on weak devices
