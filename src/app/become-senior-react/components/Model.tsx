@@ -42,7 +42,7 @@ const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
   return 'medium';
 };
 
-// Optimized performance presets
+// Optimized performance presets (30fps for better battery life)
 const PERFORMANCE_SETTINGS = {
   low: { 
     targetFPS: 30, 
@@ -51,13 +51,13 @@ const PERFORMANCE_SETTINGS = {
     antialias: false 
   },
   medium: { 
-    targetFPS: 45, 
+    targetFPS: 30, 
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.5), 
     shadows: true,
     antialias: false 
   },
   high: { 
-    targetFPS: 60, 
+    targetFPS: 30, 
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 2), 
     shadows: true,
     antialias: true 
@@ -144,19 +144,12 @@ const AutoRotatingModel = ({
     };
   }, [optimizedScene]);
   
-  // High-performance rotation with early exit
+  // Consistent 30fps rotation for smooth experience
   useFrame((_, delta) => {
     if (!modelRef.current) return;
     
-    // Skip frame throttling for high-end devices
-    if (targetFPS >= 60) {
-      modelRef.current.rotation.y += autoRotateSpeed * delta;
-      return;
-    }
-    
-    // Frame throttling for low-end devices only
     const now = performance.now();
-    const frameDelay = 1000 / targetFPS;
+    const frameDelay = 1000 / targetFPS; // Always 30fps
     
     if (now - lastFrameTime.current >= frameDelay) {
       modelRef.current.rotation.y += autoRotateSpeed * delta;
@@ -185,7 +178,7 @@ const Model = () => {
   const modelPosition: [number, number, number] = [0, -2.5, 0];
   const modelRotation: [number, number, number] = [0, 0, 0];
   const modelScale = 1;
-  const autoRotateSpeed = 0.35;
+  const autoRotateSpeed = 0.2; // Slower rotation for smoother feel
   
   // Camera settings
   const cameraPosition: [number, number, number] = [3, 2, 3];
@@ -242,7 +235,7 @@ const Model = () => {
             enableZoom={false}
             enableRotate={true}
             autoRotate={true}
-            autoRotateSpeed={devicePerformance === 'low' ? 1 : 2}
+            autoRotateSpeed={0.8} // Consistent slow rotation for all devices
             enableDamping={true}
             dampingFactor={0.05}
             maxPolarAngle={Math.PI * 0.75} // Limit vertical rotation
