@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { SvgIcon } from "@/app/components";
+import ImageOptimized from "@/app/components/ImageOptimized";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,16 +12,16 @@ const Register = () => {
     type: "personal", // personal hoặc business
   });
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleRadioChange = value => {
+  const handleRadioChange = (value: string) => {
     setFormData(prev => ({ ...prev, type: value }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     // Xử lý gửi form ở đây
@@ -49,16 +49,28 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-row w-full relative justify-center items-center border border-white/5 rounded-xl ">
-      {/* Background image chung cho cả component */}
-      <div className="absolute inset-0 z-10">
-        <Image src="/images/register.svg" alt="Background" fill quality={100} />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.2)]"></div>
+    <div className="flex flex-row w-full relative justify-center items-center rounded-t-2xl px-24 py-24 gap-12">
+      <div className="absolute inset-0 z-10 rounded-t-2xl overflow-hidden mx-6">
+        <div 
+          className="w-full h-full relative"
+          style={{
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)'
+          }}
+        >
+          <ImageOptimized name="register" className="w-full h-full" type="png" />
+        </div>
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, transparent 100%)', // Gradient từ trắng ở trên, trong suốt ở giữa, và hoàn toàn trong suốt ở dưới
+            backdropFilter: 'blur(6px)', // Background blur effect
+            WebkitBackdropFilter: 'blur(6px)' // Safari support
+          }}
+        ></div>
       </div>
 
-      {/* Phần bên trái */}
-      <div className="w-[28%] relative z-10 p-24">
+      <div className="w-1/2 relative z-10">
         <div className="mb-10">
           <h2 className="text-5xl leading-14 font-bold bg-gradient-to-b from-[#2EC5E4] to-[#E9EBF0] text-transparent bg-clip-text mb-4">
             React Nâng Cao
@@ -90,9 +102,9 @@ const Register = () => {
       </div>
 
       {/* Phần bên phải - Form đăng ký */}
-      <div className="w-1/3 relative z-10">
+      <div className="w-1/2 relative z-10">
         {/* Form container */}
-        <div className="flex flex-col p-10 space-y-6 max-w-[576px] mx-auto">
+        <div className="flex flex-col space-y-6  mx-auto">
           {/* Header */}
           <div className="flex flex-col space-y-3">
             <h2 className="text-[40px] font-semibold bg-gradient-to-r from-[#0B96FF] via-white to-[#57A0FF] text-transparent bg-clip-text">

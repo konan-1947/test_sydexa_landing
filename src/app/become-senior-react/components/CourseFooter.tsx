@@ -29,7 +29,7 @@ const CourseFooter = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={cssVariables}
-            className="relative w-full bg-[#0d092c] text-white overflow-hidden min-h-[450px] flex items-end pb-16"
+            className="relative w-full  text-white overflow-hidden min-h-[450px] flex items-end pb-16"
         >
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute inset-0 flex items-center justify-center transform -translate-y-1/8">

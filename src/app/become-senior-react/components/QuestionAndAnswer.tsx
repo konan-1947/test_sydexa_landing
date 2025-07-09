@@ -36,7 +36,22 @@ const QuestionAndAnswer = () => {
     });
   };
   return (
-    <div className="flex flex-col items-center py-14">
+    <div className="relative flex h-screen flex-col items-center justify-center py-14 overflow-visible">
+      {/* Background glow effect - small spot */}
+      <div 
+        className="absolute"
+        style={{
+          width: '1020px',
+          height: '774px',
+          left: '50%',
+          top: '60%',
+          transform: 'translateX(-50%) translateY(-50%) rotate(20deg)',
+          background: 'linear-gradient(180deg, rgba(79, 79, 214, 0.8) 0%, rgba(245, 126, 177, 0.6) 50%, rgba(245, 126, 177, 0.1) 70%, rgba(245, 126, 177, 0.05) 80%, transparent 100%)',
+          filter: 'blur(300px)',
+          zIndex: -1,
+        }}
+      />
+      
       <StyledButton1 text="Course Content" />
       <HeaderBlockComponent className="mt-4 mb-10">Q&A</HeaderBlockComponent>
       <div className="w-full max-w-[860px]">

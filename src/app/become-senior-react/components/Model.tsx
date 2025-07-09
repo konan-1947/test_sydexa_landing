@@ -81,7 +81,7 @@ const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
 // Ultra-optimized performance presets (maximum battery efficiency)
 const PERFORMANCE_SETTINGS = {
   low: { 
-    targetFPS: 20, // Ultra-low FPS for maximum battery savings - perfect for 0.03 rotation
+    targetFPS: 24, // Tăng FPS cho máy yếu để mượt hơn
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.25), // Slight increase for sharpness
     shadows: false,
     antialias: true // Enable antialiasing for smoother edges on weak devices
@@ -209,9 +209,9 @@ const Model = () => {
   
   // GPU-based rotation configuration
   const hasGoodGPU = gpuInfo.hasGPU && !gpuInfo.isIntegrated;
-  const shouldAutoRotate = hasGoodGPU && devicePerformance !== 'low'; // Disable camera orbit for weak devices
-  const rotationSpeed = devicePerformance === 'low' ? 0.05 : (hasGoodGPU ? 0.15 : 0.08); // Ultra-slow rotation for weak devices
-  const orbitSpeed = hasGoodGPU ? 0.8 : 0.3; // Slower orbit for weak GPU
+  const shouldAutoRotate = true; // Bật auto rotate cho tất cả thiết bị để có animation
+  const rotationSpeed = devicePerformance === 'low' ? 0.2 : (hasGoodGPU ? 0.15 : 0.08); // Tăng tốc độ xoay model cao hơn
+  const orbitSpeed = devicePerformance === 'low' ? 1.0 : (hasGoodGPU ? 0.8 : 0.6); // Tăng tốc độ orbit camera cao hơn
   
   // Model configuration (GPU-optimized)
   const modelPosition: [number, number, number] = [0, -2.5, 0];
