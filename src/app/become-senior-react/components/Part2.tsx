@@ -4,6 +4,7 @@ import StyledButton1 from "@/app/components/StyledButton1";
 import SvgIconOptimized from "@/app/components/SvgIconOptimized";
 import "./path2.scss";
 import HeaderBlockComponent from "@/app/components/header-block/HeaderBlock";
+import CssCursorWrapper from "./CssCursorWrapper";
 const Part2 = () => {
   return (
     <div className="w-full flex flex-col justify-start items-center h-fit relative z-10">
@@ -64,8 +65,8 @@ const Part2 = () => {
               </div>
             </BorderComponent>
           </div>
-          <div className="-ml-2 flex flex-wrap -mr-2">
-            <div className="mb-4 w-1/3 px-2">
+          <div className="-ml-2 flex flex-wrap -mr-2 ">
+            <CssCursorWrapper className="mb-4 w-1/3 px-2">
               <BorderComponent className="max-h-[600px] overflow-hidden h-full flex flex-col items-center justify-start">
                 <div className="w-full px-10 pt-8 pb-2">
                   <h3 className="font-semibold text-[28px] mb-4 bg-clip-text title-block">
@@ -234,7 +235,8 @@ const Part2 = () => {
                   />
                 </div>
               </BorderComponent>
-            </div>
+            </CssCursorWrapper>
+
             <div className="mb-4 w-2/3 px-2">
               <div className="-ml-2 -mr-2  flex flex-wrap">
                 <div className="mb-4 w-1/2 px-2">

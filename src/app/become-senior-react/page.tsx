@@ -12,6 +12,9 @@ import TestimonialComponent from "./Testimonial/Testimonial";
 import Pricing from "./components/Pricing";
 import Register from "./components/Register";
 import QuestionAndAnswer from "./components/QuestionAndAnswer";
+import CourseFooter from "./components/CourseFooter";
+import NhungGiBanSeHocDuoc from "./components/NhungGiBanSeHocDuoc";
+import EndScrollingLightSpots from "./components/EndScrollingLightSpots";
 
 const BecomeSeniorReactPage = () => {
   return (
@@ -27,7 +30,7 @@ const BecomeSeniorReactPage = () => {
           <Header />
           <Part1 />
           <div className="absolute right-0 z-10 bottom-0 w-full h-full flex items-center justify-end overflow-visible">
-            <Model />
+            {/* <Model /> */}
           </div>
         </div>
 
@@ -46,9 +49,12 @@ const BecomeSeniorReactPage = () => {
         <SvgIconOptimized className="w-full" name="ScrollLine1" />
       </div>
       <Part2 />
+
       <div className="mt-64">
         <GiangVien />
       </div>
+
+
 
       <div className="relative w-full flex justify-center items-center mt-10">
         <DualScrollingLightSpots />
@@ -57,13 +63,29 @@ const BecomeSeniorReactPage = () => {
         {/* Bottom fade gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#05001f] to-transparent pointer-events-none z-10"></div>
       </div>
+      {/* chỗ này này */}
+      <div className="ml-100 -mt-30">
+        <NhungGiBanSeHocDuoc />
+      </div>
+
+
+      <div className="relative w-full flex justify-center items-center -mt-40 -ml-65 mr-0 z-0">
+        <EndScrollingLightSpots />
+        {/* Top fade gradient */}
+        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#05001f] to-transparent pointer-events-none z-10"></div>
+        {/* Bottom fade gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#05001f] to-transparent pointer-events-none z-10"></div>
+      </div >
+
 
       <Syllabus />
       <TestimonialComponent />
+
       <Pricing />
       <Register />
       <QuestionAndAnswer />
-    </div>
+      <CourseFooter />
+    </div >
   );
 };
 

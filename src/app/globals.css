@@ -5,6 +5,12 @@
   --foreground: #ffffff;
 }
 
+@layer utilities {
+  .cursor-custom {
+    cursor: url('/cursor.svg') 0 0, auto;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -40,4 +46,67 @@ body {
     var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   overflow-x: hidden;
+}
+
+
+
+
+
+/* === PHẦN THÊM MỚI CHO HIỆU ỨNG CON TRỎ CHUỘT === */
+
+/* 1. Lớp bao bọc card, cần có position: relative */
+.interactive-card-wrapper {
+  position: relative;
+}
+
+/* 2. Khi hover, ẩn con trỏ chuột mặc định đi */
+.interactive-card-wrapper:hover {
+  cursor: none;
+}
+
+.interactive-card-wrapper::before {
+  /* === PHẦN THAY ĐỔI === */
+  /* Thay vì content text, chúng ta dùng background-image */
+  content: '';
+  /* Bắt buộc phải có, dù là rỗng */
+  width: 32px;
+  /* Đặt kích thước cho con trỏ */
+  height: 32px;
+  background-image: url('/cursor.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* Bỏ các style của bong bóng text cũ đi */
+  /* background-color, color, font-size, padding, border-radius... đã được loại bỏ */
+
+  /* === CÁC PHẦN GIỮ NGUYÊN === */
+  position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+
+  left: var(--default-x, 220px);
+  top: var(--default-y, 450px);
+  transform: translate(-50%, -50%);
+  opacity: 1;
+
+  transition:
+    left 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    top 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s;
+}
+
+/* 4. Khi hover vào card, con trỏ giả sẽ xuất hiện và di chuyển */
+.interactive-card-wrapper:hover::before {
+  /* Hiện con trỏ giả lên */
+  opacity: 1;
+
+  /* Di chuyển đến vị trí của con trỏ chuột thật (được cung cấp bởi JS) */
+  left: var(--x);
+  top: var(--y);
+
+  /* Thay đổi transition khi đang di chuyển để có cảm giác nhạy hơn */
+  transition:
+    left 0.08s linear,
+    top 0.08s linear,
+    opacity 0.2s;
 }
