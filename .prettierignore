@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Production build
+.next/
+dist/
+build/
+
+# Environment files
+.env*
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated files
+*.generated.*
+
+# Coverage
+coverage/
+
+# Logs
+*.log 

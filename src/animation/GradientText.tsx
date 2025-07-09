@@ -21,7 +21,10 @@ export default function GradientText({
 
   return (
     <div className={`animated-gradient-text ${className}`}>
-      <div className="text-content text-3xl font-semibold" style={gradientStyle}>
+      <div
+        className="text-content text-3xl font-semibold"
+        style={gradientStyle}
+      >
         {children}
       </div>
     </div>

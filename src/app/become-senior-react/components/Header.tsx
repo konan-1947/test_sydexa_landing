@@ -10,7 +10,7 @@ const items = [
 
 const Header = () => {
   return (
-    <div className="w-full h-18 flex justify-center mt-8">
+    <div className="w-full h-18 flex justify-center mt-8 bg-transparent">
       <div className="grid grid-cols-3 items-center w-[82%] px-[16px] py-[8px]">
         <div className="justify-self-start">
           <GradientText

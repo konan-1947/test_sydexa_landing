@@ -211,15 +211,15 @@ const ModelInner: FC<ModelInnerProps> = ({
       // For orbit controls, calculate true center of scaled model
       const box = new THREE.Box3().setFromObject(g);
       const center = box.getCenter(new THREE.Vector3());
-      
+
       // Set model position so its center is at origin
       g.position.set(-center.x, -center.y, -center.z);
-      
+
       // Update world matrix and get the new center
       g.updateWorldMatrix(true, true);
       const worldCenter = new THREE.Vector3();
       g.getWorldPosition(worldCenter);
-      
+
       pivotW.current.copy(worldCenter);
       pivot.copy(worldCenter);
       outer.current.position.set(0, 0, 0);
@@ -406,8 +406,11 @@ const ModelInner: FC<ModelInnerProps> = ({
 
   useFrame((_, dt) => {
     let need = false;
-    
+
     if (enableOrbitControls) {
+      // Apply offsets even with orbit controls
+      outer.current.position.set(xOff, yOff, 0);
+
       // For orbit controls, only handle auto-rotation on the inner group
       if (autoRotate) {
         inner.current.rotation.y += autoRotateSpeed * dt;

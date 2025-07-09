@@ -129,7 +129,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
 
     if (filterRef.current) {
       const particles = filterRef.current.querySelectorAll(".particle");
-      particles.forEach((p) => filterRef.current!.removeChild(p));
+      particles.forEach(p => filterRef.current!.removeChild(p));
     }
 
     if (textRef.current) {
@@ -191,9 +191,9 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             <li
               key={index}
               className={activeIndex === index ? "active" : ""}
-              onClick={(e) => handleClick(e, index)}
+              onClick={e => handleClick(e, index)}
             >
-              <a href={item.href} onKeyDown={(e) => handleKeyDown(e, index)}>
+              <a href={item.href} onKeyDown={e => handleKeyDown(e, index)}>
                 {item.label}
               </a>
             </li>

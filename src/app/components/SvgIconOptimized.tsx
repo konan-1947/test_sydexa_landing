@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
 interface SvgIconOptimizedProps {
   /** Tên file SVG (không cần đuôi .svg) */
@@ -18,7 +18,7 @@ interface SvgIconOptimizedProps {
   priority?: boolean;
   /** Props khác cho Next.js Image */
   [key: string]: string | number | boolean | undefined;
-  type?: 'svg' | 'jpg' | 'png';
+  type?: "svg" | "jpg" | "png";
 }
 
 const SvgIcon: React.FC<SvgIconOptimizedProps> = ({
@@ -26,20 +26,20 @@ const SvgIcon: React.FC<SvgIconOptimizedProps> = ({
   size = 24,
   width,
   height,
-  className = '',
+  className = "",
   alt,
   priority = false,
-  type = 'svg',
+  type = "svg",
   ...props
 }) => {
   // Xử lý kích thước
   const finalWidth = width || size;
   const finalHeight = height || size;
-  
+
   // Tạo đường dẫn đến file SVG
   const iconPath = `/icons/${name}.${type}`;
   console.log(iconPath);
-  
+
   // Alt text mặc định
   const altText = alt || `${name} icon`;
 
@@ -56,4 +56,4 @@ const SvgIcon: React.FC<SvgIconOptimizedProps> = ({
   );
 };
 
-export default SvgIcon; 
+export default SvgIcon;

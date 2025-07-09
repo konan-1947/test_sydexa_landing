@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
 interface ImageOptimizedProps {
   /** Tên file Image (không cần đuôi .jpg, .png, .webp) */
@@ -14,8 +14,9 @@ interface ImageOptimizedProps {
   className?: string;
   /** Priority loading cho Next.js Image */
   priority?: boolean;
-  type?: 'jpg' | 'png' | 'webp' | 'svg';
+  type?: "jpg" | "png" | "webp" | "svg";
   style?: React.CSSProperties;
+  quality?: number;
 }
 
 const ImageOptimized: React.FC<ImageOptimizedProps> = ({
@@ -23,20 +24,20 @@ const ImageOptimized: React.FC<ImageOptimizedProps> = ({
   size = 96,
   width,
   height,
-  className = '',
+  className = "",
   priority = false,
-  type = 'jpg',
+  type = "jpg",
   style,
   ...props
 }) => {
   // Xử lý kích thước
   const finalWidth = width || size;
   const finalHeight = height || size;
-  
+
   // Tạo đường dẫn đến file SVG
   const iconPath = `/images/${name}.${type}`;
   console.log(iconPath);
-  
+
   return (
     <Image
       src={iconPath}
@@ -51,4 +52,4 @@ const ImageOptimized: React.FC<ImageOptimizedProps> = ({
   );
 };
 
-export default ImageOptimized; 
+export default ImageOptimized;

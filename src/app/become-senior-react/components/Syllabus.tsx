@@ -103,13 +103,15 @@ const Syllabus = () => {
                     </h4>
                     <div className="min-w-48 text-right">{item.info}</div>
                   </div>
-                }>
+                }
+              >
                 <div className="pl-6 py-2 border-t border-solid border-white/10">
                   {item.content.map((content, contentIndex) => {
                     return (
                       <div
                         className="flex py-2 items-center"
-                        key={contentIndex + ""}>
+                        key={contentIndex + ""}
+                      >
                         <div className="grow w-full flex items-center">
                           {content.title}{" "}
                           {content.link && (
@@ -118,7 +120,8 @@ const Syllabus = () => {
                               className="ml-2 flex rounded-3xl items-center justify-center cursor-pointer text-[14px] leading-5 text-white hover:opacity-90 transition-opacity w-fit h-fit px-4 py-1 font-medium"
                               style={{
                                 background: `linear-gradient(135deg, #5050DD 0%, #FC80B6 100%)`,
-                              }}>
+                              }}
+                            >
                               Xem thử
                             </a>
                           )}

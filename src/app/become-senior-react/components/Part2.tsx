@@ -46,7 +46,8 @@ const Part2 = () => {
                       background: `linear-gradient(135deg, #5050DD 0%, #FC80B6 100%)`,
                       borderRadius: "40px",
                       border: "none",
-                    }}>
+                    }}
+                  >
                     Xem nội dung khóa học
                   </button>
                 </div>
@@ -56,6 +57,8 @@ const Part2 = () => {
                     name="BrowerTab"
                     type="png"
                     className="w-full h-full object-cover"
+                    width={500}
+                    height={300}
                   />
                 </div>
               </div>
@@ -288,6 +291,8 @@ const Part2 = () => {
                         name="Discord"
                         type="png"
                         className="w-full h-full object-cover"
+                        width={800}
+                        height={800}
                         style={{
                           zIndex: -1,
                           mask: "radial-gradient(ellipse 80% 80% at center, black 20%, transparent 70%)",

@@ -4,7 +4,7 @@ import StyledButton1 from "@/app/components/StyledButton1";
 
 const Part1 = () => {
   return (
-    <div className="w-full h-full flex">
+    <div className="w-full relative h-full flex">
       <div className="w-1/3 h-3/4 pl-48 flex flex-col justify-center items-left gap-8">
         <StyledButton1 text="Khoá học React" />
         {/* <div className="text-[48px] font-semibold text-left ">
@@ -27,32 +27,8 @@ const Part1 = () => {
           <span className="text-lg font-medium">Đăng ký ngay</span>
         </button>
       </div>
-      <div className="w-2/3 h-full flex items-center justify-center">
-        <div className="w-full h-full flex justify-start">
-          {/* <ModelViewer
-            url="/images/model2.glb"
-            autoRotate={true}
-            showScreenshotButton={false}
-            width="100%"
-            height="100%"
-            defaultZoom={600}
-            autoFrame={false}
-            minZoomDistance={0.02}
-            maxZoomDistance={3}
-            defaultRotationX={-20}
-            defaultRotationY={30}
-            modelXOffset={0}
-            modelYOffset={0.1}
-            enableMouseParallax={false}
-            enableHoverRotation={false}
-            enableManualRotation={false}
-            enableManualZoom={false}
-            enableOrbitControls={true}
-          /> */}
-        </div>
-      </div>
     </div>
   );
 };
 
-export default Part1; 
+export default Part1;

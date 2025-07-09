@@ -10,8 +10,9 @@ const BorderComponent = (prop: BorderComponentProps) => {
       className={
         "border-block rounded-2xl outline outline-transparent backdrop-blur-xs" +
         " " +
-        (prop?.className??'')
-      }>
+        (prop?.className ?? "")
+      }
+    >
       {prop.children}
     </div>
   );
