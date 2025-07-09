@@ -66,7 +66,7 @@ const BecomeSeniorReactPage = () => {
       </div>
 
 
-      <div className="relative w-full flex justify-center items-center -mt-40 -ml-70 mr-0">
+      <div className="relative w-full flex justify-center items-center -mt-40 -ml-65 mr-0 z-0">
         <EndScrollingLightSpots />
         {/* Top fade gradient */}
         <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#05001f] to-transparent pointer-events-none z-10"></div>
