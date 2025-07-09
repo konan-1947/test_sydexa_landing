@@ -9,6 +9,9 @@ import Part1 from "./components/Part1";
 import Part2 from "./components/Part2";
 import Syllabus from "./components/Syllabus";
 import TestimonialComponent from "./Testimonial/Testimonial";
+import Pricing from "./components/Pricing";
+import Register from "./components/Register";
+import QuestionAndAnswer from "./components/QuestionAndAnswer";
 import CourseFooter from "./components/CourseFooter";
 import NhungGiBanSeHocDuoc from "./components/NhungGiBanSeHocDuoc";
 import EndScrollingLightSpots from "./components/EndScrollingLightSpots";
@@ -77,6 +80,10 @@ const BecomeSeniorReactPage = () => {
 
       <Syllabus />
       <TestimonialComponent />
+
+      <Pricing />
+      <Register />
+      <QuestionAndAnswer />
       <CourseFooter />
     </div >
   );
