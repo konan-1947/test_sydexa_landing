@@ -25,15 +25,12 @@ const Header = () => {
           <Navigation />
         </div>
         <div className="flex items-center space-x-6 justify-self-end">
-          <button className="flex items-center px-6 py-3 border border-solid border-sd-gray rounded-full text-white cursor-pointer">
+          <button className="flex items-center px-4 py-3 border border-solid border-sd-gray rounded-full text-white cursor-pointer">
             <SvgIcon name="Lookup" size={24} />
-            <div className="ml-2 font-[500] text-[17px] leading-[20px] tracking-[3%] align-middle">
-              Tìm kiếm
-            </div>
           </button>
-          <button className="px-6 py-3 bg-white border border-solid border-sd-gray text-sd-black rounded-full font-[500] text-[17px]">
+          {/* <button className="px-6 py-3 bg-white border border-solid border-sd-gray text-sd-black rounded-full font-[500] text-[17px]">
             Đăng ký
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

@@ -11,19 +11,22 @@ const QuestionAndAnswer = () => {
     {
       heading: "Khóa học này là Online hay Offline",
       content:
-        "Tất cả khoá học tại 200Lab có 2 hình thức online và offline phù hợp với nhu cầu của từng học viên. Lớp offline sẽ được tố chức tại Phú Nhuận, Tp.HCM. Lớp online sẽ được học qua google meet.Bạn sẽ được cung cấp tài khoản học tập bao gồm các video bài giảng chất lượng cao và livestream trực tiếp cùng mentor để giúp các bạn có được trải nghiệm học tốt nhất.",
+        "Tất cả khoá học tại Sydexa có 2 hình thức: online và offline, phù hợp với nhu cầu của từng học viên. Lớp offline sẽ được tổ chức tại Phú Nhuận, Tp.HCM. Lớp online sẽ được học qua Google Meet. Bạn sẽ được cung cấp tài khoản học tập bao gồm các video bài giảng chất lượng cao và livestream trực tiếp cùng mentor để giúp bạn có được trải nghiệm học tốt nhất.",
     },
     {
       heading: "Kết thúc khóa học, tôi vẫn còn nhận được hỗ trợ từ Sydexa?",
-      content: "",
+      content:
+        "Sau khi kết thúc khóa học, bạn vẫn sẽ nhận được sự hỗ trợ từ Sydexa trong vòng 6 tháng. Chúng tôi cung cấp các buổi tư vấn nghề nghiệp và hỗ trợ giải đáp thắc mắc qua email và nhóm chat riêng.",
     },
     {
       heading: "Chứng chỉ và bằng cấp sau khóa học?",
-      content: "",
+      content:
+        "Sau khi hoàn thành khóa học, bạn sẽ nhận được chứng chỉ từ Sydexa, công nhận bạn đã hoàn thành khóa học với các kỹ năng và kiến thức đã được đào tạo. Chứng chỉ này có thể được sử dụng để bổ sung vào hồ sơ xin việc của bạn.",
     },
     {
       heading: "Hỗ trợ làm sau khóa học",
-      content: "",
+      content:
+        "Sydexa cung cấp dịch vụ hỗ trợ tìm việc làm sau khóa học. Chúng tôi có mạng lưới đối tác rộng lớn và sẽ giới thiệu bạn đến các công ty phù hợp với kỹ năng và nguyện vọng của bạn. Ngoài ra, chúng tôi còn hỗ trợ bạn trong việc chuẩn bị CV và phỏng vấn.",
     },
   ];
   const handleAccordionChange = (itemKey: string) => {
@@ -36,7 +39,7 @@ const QuestionAndAnswer = () => {
     });
   };
   return (
-    <div className="relative flex h-screen flex-col items-center justify-center py-14 overflow-visible">
+    <div className="relative flex h-fit flex-col items-center justify-center py-14 overflow-visible">
       {/* Background glow effect - small spot */}
       <div 
         className="absolute"
@@ -69,7 +72,7 @@ const QuestionAndAnswer = () => {
             const isOpen = openItems.includes(itemKey);
             return (
               <AccordionItem
-                key={index}
+                key={itemKey}
                 itemKey={itemKey}
                 className="px-7 mb-5 rounded-4xl border border-solid border-white/10 accordion-item"
                 header={

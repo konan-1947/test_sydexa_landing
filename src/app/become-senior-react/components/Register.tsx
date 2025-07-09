@@ -86,7 +86,7 @@ const Register = () => {
           <InfoCard iconName="ReactIcon" className="items-start">
             Hình thức học: Online & Offline, các mentor sẽ livestream share
             screen. Mỗi buổi đều có record lại và upload trên hệ thống học
-            online của 200Lab.
+            online của Sydexa.
           </InfoCard>
 
           <InfoCard iconName="EduIcon">

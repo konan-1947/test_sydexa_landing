@@ -58,7 +58,7 @@ const Pricing = () => {
     <div className="flex flex-col items-center py-14">
       <StyledButton1 text="What you'll lean" />
       <HeaderBlockComponent className="mt-4 mb-10 w-[640px]">
-        Hơn 2.000+ học viên đã chọn khoá học tại 200lab
+        Hơn 2.000+ học viên đã chọn khoá học tại Sydexa
       </HeaderBlockComponent>
       <div className="flex items-center justify-center gap-10 h-[700px]">
         {packages.map((pkg, index) => {

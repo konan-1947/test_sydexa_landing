@@ -1,9 +1,7 @@
-import Image from "next/image";
 import DualScrollingLightSpots from "./components/DualScrollingLightSpots";
 import GiangVien from "./components/GiangVien";
 import Header from "./components/Header";
 import Model from "./components/Model";
-// import ModelTest from "./components/ModelTest"; // Commented out - debugging complete
 import Part1 from "./components/Part1";
 import Part2 from "./components/Part2";
 import Syllabus from "./components/Syllabus";
@@ -22,8 +20,12 @@ const BecomeSeniorReactPage = () => {
     <div className="w-screen overflow-hidden">
       <div className="relative flex h-screen z-30 bg-">
         <div className="z-40 h-full absolute top-0 left-0 right-0 bg-transparent">
-          <Header />
-          <Part1 />
+          <div className="w-full h-fit z-20 absolute top-0 left-0 right-0">
+            <Header />
+          </div>
+          <div className="w-1/3  absolute top-20 z-20 left-0 h-full">
+            <Part1 />
+          </div>
           <div className="absolute right-0 z-10 bottom-0 w-full h-full flex items-center justify-end overflow-visible">
             <Model />
           </div>
