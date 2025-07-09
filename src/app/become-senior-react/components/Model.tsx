@@ -78,19 +78,19 @@ const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
   return 'medium';
 };
 
-// Optimized performance presets (24fps sweet spot for 3D models)
+// Optimized performance presets (imperceptible but efficient)
 const PERFORMANCE_SETTINGS = {
   low: { 
-    targetFPS: 24, 
-    pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1), 
+    targetFPS: 20, // Lower FPS for weak devices - still smooth for slow rotation
+    pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.25), // Slight increase for sharpness
     shadows: false,
-    antialias: false 
+    antialias: true // Enable antialiasing for smoother edges on weak devices
   },
   medium: { 
-    targetFPS: 25, 
+    targetFPS: 24, // Reduced from 25
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.5), 
     shadows: true,
-    antialias: false 
+    antialias: true // Enable for better quality
   },
   high: { 
     targetFPS: 25, 
@@ -140,19 +140,15 @@ const AutoRotatingModel = ({
           child.receiveShadow = false;
         }
         
-        // Optimize materials
+        // Optimize materials (removed lowp precision to avoid pixelation)
         if (child.material) {
           if (Array.isArray(child.material)) {
             child.material.forEach(mat => {
-                             if (devicePerformance === 'low') {
-                 (mat as THREE.Material & { precision?: string }).precision = 'lowp';
-               }
+              // Keep default precision for better quality
               mat.needsUpdate = true;
             });
           } else {
-            if (devicePerformance === 'low') {
-              (child.material as THREE.Material & { precision?: string }).precision = 'lowp';
-            }
+            // Keep default precision for better quality
             child.material.needsUpdate = true;
           }
         }
@@ -213,8 +209,8 @@ const Model = () => {
   
   // GPU-based rotation configuration
   const hasGoodGPU = gpuInfo.hasGPU && !gpuInfo.isIntegrated;
-  const shouldAutoRotate = hasGoodGPU; // Disable auto-rotate for integrated/no GPU
-  const rotationSpeed = hasGoodGPU ? 0.15 : 0.08; // Much slower for weak GPU
+  const shouldAutoRotate = hasGoodGPU && devicePerformance !== 'low'; // Disable camera orbit for weak devices
+  const rotationSpeed = devicePerformance === 'low' ? 0.05 : (hasGoodGPU ? 0.15 : 0.08); // Very slow rotation for weak devices
   const orbitSpeed = hasGoodGPU ? 0.8 : 0.3; // Slower orbit for weak GPU
   
   // Model configuration (GPU-optimized)
