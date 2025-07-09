@@ -78,22 +78,22 @@ const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
   return 'medium';
 };
 
-// Optimized performance presets (imperceptible but efficient)
+// Ultra-optimized performance presets (maximum battery efficiency)
 const PERFORMANCE_SETTINGS = {
   low: { 
-    targetFPS: 20, // Lower FPS for weak devices - still smooth for slow rotation
+    targetFPS: 15, // Ultra-low FPS for maximum battery savings - perfect for 0.03 rotation
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.25), // Slight increase for sharpness
     shadows: false,
     antialias: true // Enable antialiasing for smoother edges on weak devices
   },
   medium: { 
-    targetFPS: 24, // Reduced from 25
+    targetFPS: 20, // Reduced for better battery
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.5), 
     shadows: true,
     antialias: true // Enable for better quality
   },
   high: { 
-    targetFPS: 25, 
+    targetFPS: 24, // Reduced from 25 
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 2), 
     shadows: true,
     antialias: true 
@@ -210,7 +210,7 @@ const Model = () => {
   // GPU-based rotation configuration
   const hasGoodGPU = gpuInfo.hasGPU && !gpuInfo.isIntegrated;
   const shouldAutoRotate = hasGoodGPU && devicePerformance !== 'low'; // Disable camera orbit for weak devices
-  const rotationSpeed = devicePerformance === 'low' ? 0.05 : (hasGoodGPU ? 0.15 : 0.08); // Very slow rotation for weak devices
+  const rotationSpeed = devicePerformance === 'low' ? 0.03 : (hasGoodGPU ? 0.15 : 0.08); // Ultra-slow rotation for weak devices
   const orbitSpeed = hasGoodGPU ? 0.8 : 0.3; // Slower orbit for weak GPU
   
   // Model configuration (GPU-optimized)
