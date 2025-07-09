@@ -209,7 +209,8 @@ const Model = () => {
   
   // GPU-based rotation configuration
   const hasGoodGPU = gpuInfo.hasGPU && !gpuInfo.isIntegrated;
-  const shouldAutoRotate = hasGoodGPU && devicePerformance !== 'low'; // Disable camera orbit for weak devices
+  // const shouldAutoRotate = hasGoodGPU && devicePerformance !== 'low'; // Disable camera orbit for weak devices
+  const shouldAutoRotate = false; // Disable camera orbit for weak devices
   const rotationSpeed = devicePerformance === 'low' ? 0.03 : (hasGoodGPU ? 0.15 : 0.08); // Ultra-slow rotation for weak devices
   const orbitSpeed = hasGoodGPU ? 0.8 : 0.3; // Slower orbit for weak GPU
   
