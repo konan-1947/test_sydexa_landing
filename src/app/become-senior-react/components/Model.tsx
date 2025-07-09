@@ -13,6 +13,35 @@ useGLTF.preload(MODEL_URL);
 
 // Optimized device performance detection (cached)
 let cachedPerformance: 'low' | 'medium' | 'high' | null = null;
+let cachedGPUInfo: { hasGPU: boolean; isIntegrated: boolean } | null = null;
+
+const getGPUInfo = () => {
+  if (cachedGPUInfo) return cachedGPUInfo;
+  if (typeof window === 'undefined') return { hasGPU: true, isIntegrated: false };
+  
+  try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl') as WebGLRenderingContext | null;
+    
+    if (!gl) {
+      cachedGPUInfo = { hasGPU: false, isIntegrated: true };
+      return cachedGPUInfo;
+    }
+    
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    const renderer = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : '';
+    
+    // Check for integrated graphics (no dedicated GPU)
+    const isIntegrated = /Intel|HD Graphics|UHD Graphics|Iris|Mali|Adreno|PowerVR|VideoCore/i.test(renderer as string);
+    
+    cachedGPUInfo = { hasGPU: true, isIntegrated };
+    return cachedGPUInfo;
+  } catch (error) {
+    console.warn('GPU detection failed:', error);
+    cachedGPUInfo = { hasGPU: true, isIntegrated: false };
+    return cachedGPUInfo;
+  }
+};
 
 const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
   if (cachedPerformance) return cachedPerformance;
@@ -21,6 +50,13 @@ const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
   // Fast mobile detection
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   if (isMobile) {
+    cachedPerformance = 'low';
+    return 'low';
+  }
+  
+  // GPU check
+  const gpuInfo = getGPUInfo();
+  if (!gpuInfo.hasGPU || gpuInfo.isIntegrated) {
     cachedPerformance = 'low';
     return 'low';
   }
@@ -42,22 +78,22 @@ const getDevicePerformance = (): 'low' | 'medium' | 'high' => {
   return 'medium';
 };
 
-// Optimized performance presets (30fps for better battery life)
+// Optimized performance presets (24fps sweet spot for 3D models)
 const PERFORMANCE_SETTINGS = {
   low: { 
-    targetFPS: 30, 
+    targetFPS: 24, 
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1), 
     shadows: false,
     antialias: false 
   },
   medium: { 
-    targetFPS: 30, 
+    targetFPS: 25, 
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1.5), 
     shadows: true,
     antialias: false 
   },
   high: { 
-    targetFPS: 30, 
+    targetFPS: 25, 
     pixelRatio: Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 2), 
     shadows: true,
     antialias: true 
@@ -144,12 +180,12 @@ const AutoRotatingModel = ({
     };
   }, [optimizedScene]);
   
-  // Consistent 30fps rotation for smooth experience
+  // Consistent 24-25fps rotation for optimal battery/smoothness balance
   useFrame((_, delta) => {
     if (!modelRef.current) return;
     
     const now = performance.now();
-    const frameDelay = 1000 / targetFPS; // Always 30fps
+          const frameDelay = 1000 / targetFPS; // 24-25fps optimal
     
     if (now - lastFrameTime.current >= frameDelay) {
       modelRef.current.rotation.y += autoRotateSpeed * delta;
@@ -172,13 +208,20 @@ const AutoRotatingModel = ({
 const Model = () => {
   // Cached performance detection (runs once)
   const devicePerformance = useMemo(() => getDevicePerformance(), []);
+  const gpuInfo = useMemo(() => getGPUInfo(), []);
   const settings = PERFORMANCE_SETTINGS[devicePerformance];
   
-  // Model configuration (optimized for performance)
+  // GPU-based rotation configuration
+  const hasGoodGPU = gpuInfo.hasGPU && !gpuInfo.isIntegrated;
+  const shouldAutoRotate = hasGoodGPU; // Disable auto-rotate for integrated/no GPU
+  const rotationSpeed = hasGoodGPU ? 0.15 : 0.08; // Much slower for weak GPU
+  const orbitSpeed = hasGoodGPU ? 0.8 : 0.3; // Slower orbit for weak GPU
+  
+  // Model configuration (GPU-optimized)
   const modelPosition: [number, number, number] = [0, -2.5, 0];
   const modelRotation: [number, number, number] = [0, 0, 0];
   const modelScale = 1;
-  const autoRotateSpeed = 0.2; // Slower rotation for smoother feel
+  const autoRotateSpeed = rotationSpeed;
   
   // Camera settings
   const cameraPosition: [number, number, number] = [3, 2, 3];
@@ -234,8 +277,8 @@ const Model = () => {
             enablePan={false}
             enableZoom={false}
             enableRotate={true}
-            autoRotate={true}
-            autoRotateSpeed={0.8} // Consistent slow rotation for all devices
+            autoRotate={shouldAutoRotate} // Disable for weak GPU
+            autoRotateSpeed={orbitSpeed} // GPU-adaptive speed
             enableDamping={true}
             dampingFactor={0.05}
             maxPolarAngle={Math.PI * 0.75} // Limit vertical rotation
