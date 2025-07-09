@@ -36,7 +36,6 @@ const ImageOptimized: React.FC<ImageOptimizedProps> = ({
 
   // Tạo đường dẫn đến file SVG
   const iconPath = `/images/${name}.${type}`;
-  console.log(iconPath);
 
   return (
     <Image

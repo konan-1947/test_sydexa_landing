@@ -9,6 +9,9 @@ import Part1 from "./components/Part1";
 import Part2 from "./components/Part2";
 import Syllabus from "./components/Syllabus";
 import TestimonialComponent from "./Testimonial/Testimonial";
+import Pricing from "./components/Pricing";
+import Register from "./components/Register";
+import QuestionAndAnswer from "./components/QuestionAndAnswer";
 
 const BecomeSeniorReactPage = () => {
   return (
@@ -57,7 +60,9 @@ const BecomeSeniorReactPage = () => {
 
       <Syllabus />
       <TestimonialComponent />
-      <div></div>
+      <Pricing />
+      <Register />
+      <QuestionAndAnswer />
     </div>
   );
 };

@@ -38,7 +38,6 @@ const SvgIcon: React.FC<SvgIconOptimizedProps> = ({
 
   // Tạo đường dẫn đến file SVG
   const iconPath = `/icons/${name}.${type}`;
-  console.log(iconPath);
 
   // Alt text mặc định
   const altText = alt || `${name} icon`;
