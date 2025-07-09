@@ -4,6 +4,7 @@ import DualScrollingLightSpots from "./components/DualScrollingLightSpots";
 import GiangVien from "./components/GiangVien";
 import Header from "./components/Header";
 import Model from "./components/Model";
+// import ModelTest from "./components/ModelTest"; // Commented out - debugging complete
 import Part1 from "./components/Part1";
 import Part2 from "./components/Part2";
 import Syllabus from "./components/Syllabus";
@@ -12,11 +13,17 @@ import TestimonialComponent from "./Testimonial/Testimonial";
 const BecomeSeniorReactPage = () => {
   return (
     <div className="w-screen overflow-hidden">
+      {/* Test Component - Removed after successful debugging */}
+      {/* 
+      <div style={{ position: "fixed", top: 0, left: 0, zIndex: 9999, background: "white", padding: "20px" }}>
+        <ModelTest />
+      </div>
+      */}
       <div className="relative flex h-screen z-30">
         <div className="z-40 h-full absolute top-0 left-0 right-0 bg-transparent">
           <Header />
           <Part1 />
-          <div className="absolute right-0 z-10 bottom-10 w-full h-full flex items-center justify-end overflow-visible">
+          <div className="absolute right-0 z-10 bottom-0 w-full h-full flex items-center justify-end overflow-visible">
             <Model />
           </div>
         </div>
@@ -50,6 +57,7 @@ const BecomeSeniorReactPage = () => {
 
       <Syllabus />
       <TestimonialComponent />
+      <div></div>
     </div>
   );
 };

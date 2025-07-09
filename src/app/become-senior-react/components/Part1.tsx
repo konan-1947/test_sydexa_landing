@@ -1,5 +1,4 @@
 import BlurText from "@/animation/BlurText";
-import ModelViewer from "@/animation/ModelInner";
 import StyledButton1 from "@/app/components/StyledButton1";
 
 const Part1 = () => {
