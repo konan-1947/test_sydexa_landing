@@ -4,7 +4,14 @@ import { useEffect, useState, useRef } from "react";
 
 const DualScrollingLightSpots = () => {
   const [, setScrollY] = useState(0);
+  const [currentGradientOffset, setCurrentGradientOffset] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
+
+  // Hàm lerp để tạo smooth transition
+  const lerp = (start: number, end: number, factor: number) => {
+    return start + (end - start) * factor;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +20,26 @@ const DualScrollingLightSpots = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // useEffect để handle smooth animation
+  useEffect(() => {
+    const animate = () => {
+      const targetGradientOffset = getGradientOffset();
+      
+      // Sử dụng lerp với factor 0.08 (càng nhỏ càng mượt nhưng càng chậm)
+      setCurrentGradientOffset(prev => lerp(prev, targetGradientOffset, 0.08));
+      
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animationRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
   }, []);
 
   // Tính toán vị trí của đốm sáng dọc theo vector dựa trên scroll
@@ -32,8 +59,6 @@ const DualScrollingLightSpots = () => {
 
     return gradientOffset;
   };
-
-  const gradientOffset = getGradientOffset();
 
   return (
     <div ref={containerRef} className="relative flex items-start">
@@ -76,27 +101,27 @@ const DualScrollingLightSpots = () => {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop
-                  offset={`${Math.max(0, (gradientOffset - 30) / 100)}`}
+                  offset={`${Math.max(0, (currentGradientOffset - 50) / 100)}`}
                   stopColor="white"
                   stopOpacity="0"
                 />
                 <stop
-                  offset={`${Math.max(0, (gradientOffset - 10) / 100)}`}
+                  offset={`${Math.max(0, (currentGradientOffset - 20) / 100)}`}
                   stopColor="white"
-                  stopOpacity="0"
+                  stopOpacity="0.3"
                 />
                 <stop
-                  offset={`${gradientOffset / 100}`}
+                  offset={`${currentGradientOffset / 100}`}
                   stopColor="white"
-                  stopOpacity="0.6"
+                  stopOpacity="1"
                 />
                 <stop
-                  offset={`${Math.min(1, (gradientOffset + 10) / 100)}`}
+                  offset={`${Math.min(1, (currentGradientOffset + 20) / 100)}`}
                   stopColor="white"
-                  stopOpacity="0"
+                  stopOpacity="0.3"
                 />
                 <stop
-                  offset={`${Math.min(1, (gradientOffset + 30) / 100)}`}
+                  offset={`${Math.min(1, (currentGradientOffset + 50) / 100)}`}
                   stopColor="white"
                   stopOpacity="0"
                 />
@@ -150,27 +175,27 @@ const DualScrollingLightSpots = () => {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop
-                  offset={`${Math.max(0, (gradientOffset - 30) / 100)}`}
+                  offset={`${Math.max(0, (currentGradientOffset - 50) / 100)}`}
                   stopColor="white"
                   stopOpacity="0"
                 />
                 <stop
-                  offset={`${Math.max(0, (gradientOffset - 10) / 100)}`}
+                  offset={`${Math.max(0, (currentGradientOffset - 20) / 100)}`}
                   stopColor="white"
-                  stopOpacity="0"
+                  stopOpacity="0.3"
                 />
                 <stop
-                  offset={`${gradientOffset / 100}`}
+                  offset={`${currentGradientOffset / 100}`}
                   stopColor="white"
-                  stopOpacity="0.6"
+                  stopOpacity="1"
                 />
                 <stop
-                  offset={`${Math.min(1, (gradientOffset + 10) / 100)}`}
+                  offset={`${Math.min(1, (currentGradientOffset + 20) / 100)}`}
                   stopColor="white"
-                  stopOpacity="0"
+                  stopOpacity="0.3"
                 />
                 <stop
-                  offset={`${Math.min(1, (gradientOffset + 30) / 100)}`}
+                  offset={`${Math.min(1, (currentGradientOffset + 50) / 100)}`}
                   stopColor="white"
                   stopOpacity="0"
                 />

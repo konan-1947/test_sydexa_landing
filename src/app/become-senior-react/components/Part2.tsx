@@ -1,10 +1,10 @@
 import BorderComponent from "@/app/components/border/border";
 import ImageOptimized from "@/app/components/ImageOptimized";
 import StyledButton1 from "@/app/components/StyledButton1";
-import SvgIconOptimized from "@/app/components/SvgIconOptimized";
 import "./path2.scss";
 import HeaderBlockComponent from "@/app/components/header-block/HeaderBlock";
 import CssCursorWrapper from "./CssCursorWrapper";
+import ScrollingLines from "./ScrollingLines";
 const Part2 = () => {
   return (
     <div className="w-full flex flex-col justify-start items-center h-fit relative z-10">
@@ -13,7 +13,7 @@ const Part2 = () => {
         Trải nghiệm học tập <br /> cá nhân hóa <br /> linh hoạt & thực chiến.
       </HeaderBlockComponent>
       <div className="w-full h-fit relative flex justify-center items-start pt-17">
-        <div className="container mx-auto relative z-10">
+        <div className="container mx-auto h-10/12 relative z-10">
           <div className=" relative overflow-hidden rounded-2xl mb-4">
             <BorderComponent>
               <div className="flex w-full h-[300px]">
@@ -311,11 +311,7 @@ const Part2 = () => {
         </div>
 
         <div className="absolute top-0 left-0 w-full h-full z-1">
-          <SvgIconOptimized
-            width={28}
-            name="ScrollLine2"
-            className="w-full h-full"
-          />
+          <ScrollingLines />
         </div>
       </div>
     </div>

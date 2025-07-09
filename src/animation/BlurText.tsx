@@ -1,7 +1,13 @@
 "use client";
 
-import { motion, Transition } from "framer-motion";
-import { useEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register GSAP plugins
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 type BlurTextProps = {
   text?: string;
@@ -11,128 +17,120 @@ type BlurTextProps = {
   direction?: "top" | "bottom";
   threshold?: number;
   rootMargin?: string;
-  animationFrom?: Record<string, string | number>;
-  animationTo?: Array<Record<string, string | number>>;
-  easing?: (t: number) => number;
   onAnimationComplete?: () => void;
   stepDuration?: number;
-};
-
-const buildKeyframes = (
-  from: Record<string, string | number>,
-  steps: Array<Record<string, string | number>>
-): Record<string, Array<string | number>> => {
-  const keys = new Set<string>([
-    ...Object.keys(from),
-    ...steps.flatMap(s => Object.keys(s)),
-  ]);
-
-  const keyframes: Record<string, Array<string | number>> = {};
-  keys.forEach(k => {
-    keyframes[k] = [from[k], ...steps.map(s => s[k])];
-  });
-  return keyframes;
+  easing?: string; // Keep compatible với Framer Motion API
 };
 
 const BlurText: React.FC<BlurTextProps> = ({
   text = "",
-  delay = 200,
+  delay = 200, // Convert back to ms để tương thích với API cũ
   className = "",
   animateBy = "words",
   direction = "top",
   threshold = 0.1,
   rootMargin = "0px",
-  animationFrom,
-  animationTo,
-  easing = t => t,
   onAnimationComplete,
   stepDuration = 0.35,
+  easing = "power2.out",
 }) => {
-  const elements = animateBy === "words" ? text.split(" ") : text.split("");
-  const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLParagraphElement>(null);
+  const containerRef = useRef<HTMLParagraphElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+
+  // Memoize elements splitting
+  const elements = useMemo(() => 
+    animateBy === "words" ? text.split(" ") : text.split(""), 
+    [text, animateBy]
+  );
+
+  // Memoize animation properties
+  const animationProps = useMemo(() => {
+    const yOffset = direction === "top" ? -50 : 50;
+    
+    return {
+      from: { 
+        filter: "blur(10px)", 
+        opacity: 0, 
+        y: yOffset,
+        willChange: "transform, filter, opacity"
+      },
+      to: { 
+        filter: "blur(0px)", 
+        opacity: 1, 
+        y: 0,
+        willChange: "auto"
+      }
+    };
+  }, [direction]);
 
   useEffect(() => {
-    if (!ref.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.unobserve(ref.current as Element);
-        }
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Get all span elements
+    const spans = container.querySelectorAll(".blur-char");
+    if (spans.length === 0) return;
+
+    // Set initial state
+    gsap.set(spans, animationProps.from);
+
+    // Create timeline
+    const tl = gsap.timeline({ 
+      paused: true,
+      onComplete: onAnimationComplete
+    });
+
+    // Convert delay từ ms sang seconds để tương thích
+    const delayInSeconds = delay / 1000;
+
+    // Single-step animation với stagger
+    tl.to(spans, {
+      ...animationProps.to,
+      duration: stepDuration,
+      ease: easing,
+      stagger: delayInSeconds,
+    });
+
+    timelineRef.current = tl;
+
+    // Setup ScrollTrigger
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: container,
+      start: `top bottom-=${rootMargin}`,
+      once: true,
+      onEnter: () => {
+        tl.play();
       },
-      { threshold, rootMargin }
-    );
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+    });
 
-  const defaultFrom = useMemo(
-    () =>
-      direction === "top"
-        ? { filter: "blur(10px)", opacity: 0, y: -50 }
-        : { filter: "blur(10px)", opacity: 0, y: 50 },
-    [direction]
-  );
-
-  const defaultTo = useMemo(
-    () => [
-      {
-        filter: "blur(5px)",
-        opacity: 0.5,
-        y: direction === "top" ? 5 : -5,
-      },
-      { filter: "blur(0px)", opacity: 1, y: 0 },
-    ],
-    [direction]
-  );
-
-  const fromSnapshot = animationFrom ?? defaultFrom;
-  const toSnapshots = animationTo ?? defaultTo;
-
-  const stepCount = toSnapshots.length + 1;
-  const totalDuration = stepDuration * (stepCount - 1);
-  const times = Array.from({ length: stepCount }, (_, i) =>
-    stepCount === 1 ? 0 : i / (stepCount - 1)
-  );
+    // Cleanup function
+    return () => {
+      scrollTrigger.kill();
+      tl.kill();
+      timelineRef.current = null;
+    };
+  }, [elements, animationProps, delay, stepDuration, easing, threshold, rootMargin, onAnimationComplete]);
 
   return (
     <p
-      ref={ref}
+      ref={containerRef}
       className={className}
       style={{ display: "flex", flexWrap: "wrap" }}
     >
-      {elements.map((segment, index) => {
-        const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
-
-        const spanTransition: Transition = {
-          duration: totalDuration,
-          times,
-          delay: (index * delay) / 1000,
-        };
-        (spanTransition as any).ease = easing;
-
-        return (
-          <motion.span
-            key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={spanTransition}
-            onAnimationComplete={
-              index === elements.length - 1 ? onAnimationComplete : undefined
-            }
-            style={{
-              display: "inline-block",
-              willChange: "transform, filter, opacity",
-            }}
-          >
-            {segment === " " ? "\u00A0" : segment}
-            {animateBy === "words" && index < elements.length - 1 && "\u00A0"}
-          </motion.span>
-        );
-      })}
+      {elements.map((segment, index) => (
+        <span
+          key={index}
+          className="blur-char"
+          style={{
+            display: "inline-block",
+          }}
+        >
+          {segment === " " ? "\u00A0" : segment}
+          {animateBy === "words" && index < elements.length - 1 && "\u00A0"}
+        </span>
+      ))}
     </p>
   );
 };
 
-export default BlurText;
+export default BlurText; 

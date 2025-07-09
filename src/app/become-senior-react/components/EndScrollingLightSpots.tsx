@@ -4,7 +4,14 @@ import { useEffect, useState, useRef } from "react";
 
 const EndScrollingLightSpots = () => {
     const [, setScrollY] = useState(0);
+    const [currentGradientOffset, setCurrentGradientOffset] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
+    const animationRef = useRef<number | null>(null);
+
+    // Hàm lerp để tạo smooth transition
+    const lerp = (start: number, end: number, factor: number) => {
+        return start + (end - start) * factor;
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -13,6 +20,26 @@ const EndScrollingLightSpots = () => {
 
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // useEffect để handle smooth animation
+    useEffect(() => {
+        const animate = () => {
+            const targetGradientOffset = getGradientOffset();
+            
+            // Sử dụng lerp với factor 0.08 (càng nhỏ càng mượt nhưng càng chậm)
+            setCurrentGradientOffset(prev => lerp(prev, targetGradientOffset, 0.08));
+            
+            animationRef.current = requestAnimationFrame(animate);
+        };
+
+        animationRef.current = requestAnimationFrame(animate);
+
+        return () => {
+            if (animationRef.current) {
+                cancelAnimationFrame(animationRef.current);
+            }
+        };
     }, []);
 
     const getGradientOffset = () => {
@@ -32,19 +59,7 @@ const EndScrollingLightSpots = () => {
         return gradientOffset;
     };
 
-    const gradientOffset = getGradientOffset();
-
-    const xScale = 532 / 592;
-
-    const scalePathX = (d: string, scale: number) => {
-        const dScaled = "M1.35 0.0454102L1.35 42.9068C1.35 60.634 14.31 74.9831 30.24 74.9065L501.66 72.6389C517.65 72.5623 531 86.9115 531 104.639V184.5";
-        return dScaled;
-    };
-
-    const scaledPath = scalePathX(
-        "M1.5 0.0454102L1.5 42.9068C1.5 60.634 15.9113 74.9831 33.6383 74.9065L558.362 72.6389C576.089 72.5623 590.5 86.9115 590.5 104.639V184.5",
-        xScale
-    );
+    const scaledPath = "M1.35 0.0454102L1.35 42.9068C1.35 60.634 14.31 74.9831 30.24 74.9065L501.66 72.6389C517.65 72.5623 531 86.9115 531 104.639V184.5";
 
     return (
         <div ref={containerRef} className="relative flex items-center justify-center w-[700px] max-w-full">
@@ -82,26 +97,28 @@ const EndScrollingLightSpots = () => {
                             gradientUnits="userSpaceOnUse"
                         >
                             <stop
-                                offset={`${Math.max(0, (gradientOffset - 30) / 100)}`}
+                                offset={`${Math.max(0, (currentGradientOffset - 100) / 100)}`}
                                 stopColor="#FFFFFF"
                                 stopOpacity="0"
                             />
                             <stop
-                                offset={`${Math.max(0, (gradientOffset - 10) / 100)}`}
-                                stopOpacity="0"
-                            />
-                            <stop
-                                offset={`${gradientOffset / 100}`}
+                                offset={`${Math.max(0, (currentGradientOffset - 40) / 100)}`}
                                 stopColor="#FFFFFF"
-                                stopOpacity="0.7"
+                                stopOpacity="0.3"
                             />
                             <stop
-                                offset={`${Math.min(1, (gradientOffset + 10) / 100)}`}
+                                offset={`${currentGradientOffset / 100}`}
                                 stopColor="#FFFFFF"
-                                stopOpacity="0"
+                                stopOpacity="1"
                             />
                             <stop
-                                offset={`${Math.min(1, (gradientOffset + 30) / 100)}`}
+                                offset={`${Math.min(1, (currentGradientOffset + 40) / 100)}`}
+                                stopColor="#FFFFFF"
+                                stopOpacity="0.3"
+                            />
+                            <stop
+                                offset={`${Math.min(1, (currentGradientOffset + 100) / 100)}`}
+                                stopColor="#FFFFFF"
                                 stopOpacity="0"
                             />
                         </linearGradient>

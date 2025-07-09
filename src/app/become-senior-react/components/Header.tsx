@@ -1,12 +1,6 @@
-import GooeyNav from "@/animation/GooeyNav";
 import GradientText from "@/animation/GradientText";
 import { SvgIcon } from "@/app/components";
-
-const items = [
-  { label: "Homepage", href: "#" },
-  { label: "Blog", href: "#" },
-  { label: "Learn .", href: "#" },
-];
+import Navigation from "./Navigation";
 
 const Header = () => {
   return (
@@ -28,16 +22,7 @@ const Header = () => {
           </GradientText>
         </div>
         <div className="justify-self-center">
-          <GooeyNav
-            items={items}
-            particleCount={15}
-            particleDistances={[90, 10]}
-            particleR={100}
-            initialActiveIndex={0}
-            animationTime={600}
-            timeVariance={300}
-            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-          />
+          <Navigation />
         </div>
         <div className="flex items-center space-x-6 justify-self-end">
           <button className="flex items-center px-6 py-3 border border-solid border-sd-gray rounded-full text-white cursor-pointer">
