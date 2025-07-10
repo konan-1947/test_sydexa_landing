@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description: "Sydexa",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
