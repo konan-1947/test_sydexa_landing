@@ -27,7 +27,7 @@ const BecomeSeniorReactPage = () => {
             <Part1 />
           </div>
           <div className="absolute right-0 z-10 bottom-0 w-full h-full flex items-center justify-end overflow-visible">
-            <Model />
+            {/* <Model /> */}
           </div>
         </div>
 
