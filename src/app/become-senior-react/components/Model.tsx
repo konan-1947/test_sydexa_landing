@@ -254,9 +254,15 @@ const Model = () => {
           
           {/* Environment for all devices, but optimized */}
           <Environment 
-            preset={devicePerformance === 'low' ? 'studio' : 'sunset'} 
+            preset="studio"
             background={false} 
           />
+          
+          {/* Alternative: Use custom lightweight HDRI for better devices */}
+          {/* <Environment 
+            files="/path/to/lightweight.hdr"
+            background={false} 
+          /> */}
           
           <Suspense fallback={<LoadingBox />}>
             <AutoRotatingModel 
