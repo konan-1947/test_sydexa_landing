@@ -1,7 +1,7 @@
 import DualScrollingLightSpots from "./components/DualScrollingLightSpots";
 import GiangVien from "./components/GiangVien";
 import Header from "./components/Header";
-import Model from "./components/Model";
+// import Model from "./components/Model";
 import Part1 from "./components/Part1";
 import Part2 from "./components/Part2";
 import Syllabus from "./components/Syllabus";
