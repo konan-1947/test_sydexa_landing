@@ -8,6 +8,7 @@ import * as THREE from "three";
 // Model URL constant for preloading
 const MODEL_URL = "/images/model27.glb";
 
+
 // Preload model immediately when module loads
 useGLTF.preload(MODEL_URL);
 
