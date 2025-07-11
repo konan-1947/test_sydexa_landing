@@ -7,15 +7,14 @@ import { Autoplay } from "swiper/modules";
 import { useState, useEffect, useMemo } from "react";
 
 const TestimonialComponent = () => {
-  // Không cần activeIndex và slidesPerView để tính style nữa, nhưng vẫn giữ để Swiper hoạt động
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Dữ liệu không đổi, dùng useMemo là tốt
   const testimonialData = useMemo(() => [
+    // ... Dữ liệu của bạn không thay đổi
     {
       img: "/images/testimonial/js-miller.jpg",
       name: "Jason Miller",
@@ -72,7 +71,6 @@ const TestimonialComponent = () => {
     },
   ], []);
 
-  // Tránh lỗi Hydration
   if (!isMounted) {
     return (
       <div className="w-full py-20">
@@ -84,14 +82,17 @@ const TestimonialComponent = () => {
   }
 
   return (
-    <div className="w-full py-20 testimonial-container">
+    // Thay đổi: Thêm padding ngang cho container
+    <div className="w-full py-20 testimonial-container px-4 sm:px-0">
       <Swiper
-        slidesPerView={1}
+        // Thay đổi: slidesPerView mặc định là 1.2
+        slidesPerView={1.2}
         spaceBetween={16}
         loop={true}
         speed={800}
         autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
         breakpoints={{
+          // Thay đổi: breakpoint bắt đầu từ sm (640px)
           640: { slidesPerView: 2, spaceBetween: 20 },
           768: { slidesPerView: 3, spaceBetween: 30 },
           1024: { slidesPerView: 4, spaceBetween: 40 },
@@ -99,24 +100,18 @@ const TestimonialComponent = () => {
         }}
         modules={[Autoplay]}
         centeredSlides={true}
-      // Không cần onSlideChange và onBreakpoint để tính style nữa
       >
         {testimonialData.map((item, index) => (
           <SwiperSlide className="h-auto py-10" key={index}>
-            {/* 
-              Điểm thay đổi cốt lõi: Sử dụng render prop ({ isActive }) 
-              để xác định slide nào đang ở giữa.
-            */}
             {({ isActive }) => (
               <div
                 className="testimonial-item-wrapper h-full transition-all duration-500 ease-out"
                 style={{
-                  // Áp dụng style trực tiếp dựa trên isActive
-                  transform: isActive ? 'scale(1.05)' : 'scale(0.9)',
-                  opacity: isActive ? 1 : 0.7,
+                  transform: isActive ? 'scale(1)' : 'scale(0.85)', // Thay đổi: scale cho active là 1, không active nhỏ hơn
+                  opacity: isActive ? 1 : 0.6,
                   boxShadow: isActive
-                    ? `0 0 50px 8px ${item.glowColor}` // Hiệu ứng glow mạnh cho slide active
-                    : '0 10px 25px -10px rgba(0, 0, 0, 0.4)', // Bóng mờ cho các slide khác
+                    ? `0 0 50px 8px ${item.glowColor}`
+                    : '0 10px 25px -10px rgba(0, 0, 0, 0.4)',
                   borderRadius: '16px',
                 }}
               >
