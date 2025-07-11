@@ -51,10 +51,10 @@ const BecomeSeniorReactPage = () => {
               Đây là cách làm đúng của Tailwind, thay thế cho `isMobile`.
           */}
           <div className="hidden lg:relative lg:block h-full">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <IframeModelViewer className="w-[1500px] h-[1500px] max-w-none max-h-none" />
-              {/* <ThreeWorker modelUrl="/images/model27.glb" className="w-[1500px] h-[1500px] max-w-none max-h-none" /> */}
+            <div className="w-[1500px] h-[700px] absolute top-1/2 left-1/2 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center z-10">
+              <IframeModelViewer className="w-[1500px] h-[1500px] max-w-[1200px] max-h-[1200px]" />
             </div>
+
           </div>
         </main>
       </div>
@@ -66,7 +66,7 @@ const BecomeSeniorReactPage = () => {
         <GiangVien />
       </div>
 
-      <div className="relative w-full flex justify-center items-center mt-10">
+      <div className="relative w-full flex justify-center items-center mt-10 z-10">
         <DualScrollingLightSpots />
         <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#05001f] to-transparent pointer-events-none z-10"></div>
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#05001f] to-transparent pointer-events-none z-10"></div>

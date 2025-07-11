@@ -3,7 +3,7 @@ interface IframeModelViewerProps {
 }
 
 const IframeModelViewer = ({ className }: IframeModelViewerProps) => {
-    const modelSrc = "https://tinyglb.com/viewer/fe55855358dd479584fd81010eeeb14c";
+    const modelSrc = "https://tinyglb.com/viewer/b83d118d203a4ad6a10fec497597c6ed";
 
     return (
         <iframe

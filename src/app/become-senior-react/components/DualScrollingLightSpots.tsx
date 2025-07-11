@@ -26,10 +26,10 @@ const DualScrollingLightSpots = () => {
   useEffect(() => {
     const animate = () => {
       const targetGradientOffset = getGradientOffset();
-      
+
       // Sử dụng lerp với factor 0.08 (càng nhỏ càng mượt nhưng càng chậm)
       setCurrentGradientOffset(prev => lerp(prev, targetGradientOffset, 0.08));
-      
+
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -61,7 +61,7 @@ const DualScrollingLightSpots = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative flex items-start">
+    <div ref={containerRef} className="relative flex items-start z-10">
       {/* Left SVG */}
       <div className="relative z-10" style={{ marginRight: "6px" }}>
         <div className="w-[590px] h-[283px] relative pointer-events-none">
