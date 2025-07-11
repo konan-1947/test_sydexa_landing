@@ -13,7 +13,7 @@ import NhungGiBanSeHocDuoc from "./components/NhungGiBanSeHocDuoc";
 import EndScrollingLightSpots from "./components/EndScrollingLightSpots";
 import AnimatedPathSvg from "./components/AnimatedPathSvg";
 import ImageOptimized from "@/app/components/ImageOptimized";
-import IframeModelViewer from "./components/IframeModelViewer";
+// import IframeModelViewer from "./components/IframeModelViewer";
 //import ThreeModelViewer from "./components/ThreeModelViewer";
 
 
@@ -52,7 +52,7 @@ const BecomeSeniorReactPage = () => {
           */}
           <div className="hidden lg:relative lg:block h-full">
             <div className="w-[1500px] h-[700px] absolute top-1/2 left-1/2 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center z-10">
-              <IframeModelViewer className="w-[1500px] h-[1500px] max-w-[1200px] max-h-[1200px]" />
+              {/* <IframeModelViewer className="w-[1500px] h-[1500px] max-w-[1200px] max-h-[1200px]" /> */}
             </div>
 
           </div>
