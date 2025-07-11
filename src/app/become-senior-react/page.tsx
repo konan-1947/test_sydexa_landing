@@ -1,7 +1,7 @@
 import DualScrollingLightSpots from "./components/DualScrollingLightSpots";
 import GiangVien from "./components/GiangVien";
 import Header from "./components/Header";
-import Model from "./components/Model";
+// import Model from "./components/Model";
 import Part1 from "./components/Part1";
 import Part2 from "./components/Part2";
 import Syllabus from "./components/Syllabus";
@@ -14,7 +14,7 @@ import NhungGiBanSeHocDuoc from "./components/NhungGiBanSeHocDuoc";
 import EndScrollingLightSpots from "./components/EndScrollingLightSpots";
 import AnimatedPathSvg from "./components/AnimatedPathSvg";
 import ImageOptimized from "@/app/components/ImageOptimized";
-import IframeModelViewer from "./components/IframeModelViewer";
+// import IframeModelViewer from "./components/IframeModelViewer";
 import { isMobile } from 'react-device-detect'
 import ThreeModelViewer from "./components/ThreeModelViewer";
 
@@ -62,11 +62,13 @@ const BecomeSeniorReactPage = () => {
           </div>
 
           {/* Ô Mô hình 3D (Bên phải) */}
-          <div className="hidden lg:block relative h-full">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <ThreeModelViewer className="w-[1500px] h-[1500px] max-w-none max-h-none" />
+          {isMobile ? null : (
+            <div className="hidden lg:block relative h-full">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <ThreeModelViewer className="w-[1500px] h-[1500px] max-w-none max-h-none" />
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
       </div>

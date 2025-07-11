@@ -1,4 +1,4 @@
-import BlurText from "@/animation/BlurText";
+// import BlurText from "@/animation/BlurText";
 import StyledButton1 from "@/app/components/StyledButton1";
 
 const Part1 = () => {
