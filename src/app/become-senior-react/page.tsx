@@ -15,11 +15,10 @@ import AnimatedPathSvg from "./components/AnimatedPathSvg";
 import ImageOptimized from "@/app/components/ImageOptimized";
 //import IframeModelViewer from "./components/IframeModelViewer";
 //import ThreeModelViewer from "./components/ThreeModelViewer";
-import HoverToLoadModelViewer from './components/HoverToLoadModelViewer';
+import LazyLoadModelViewer from "./components/LazyLoadModelViewer";
 
 
 const BecomeSeniorReactPage = () => {
-  const maskImage = "/images/mask_model.png";
   return (
     <div className="w-screen overflow-x-hidden">
 
@@ -54,15 +53,14 @@ const BecomeSeniorReactPage = () => {
           */}
           <div className="hidden lg:relative lg:block h-full">
             <div className="w-[1500px] h-[700px] absolute top-1/2 left-1/2 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center z-10">
-              {/* 
-                3. Thay thế component cũ bằng component mới 
-                - Giữ nguyên `className`.
-                - Truyền vào prop `maskImageSrc`.
-              */}
-              <HoverToLoadModelViewer
+
+              {/* Thay thế lời gọi component cũ bằng component mới */}
+              <LazyLoadModelViewer
                 className="w-[1500px] h-[1500px] max-w-[1200px] max-h-[1200px]"
-                maskImageSrc={maskImage}
+                modelUrl="/images/model27.glb"
+                maskImageUrl="/images/mask_model.png"
               />
+
             </div>
           </div>
         </main>
