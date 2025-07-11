@@ -3,7 +3,7 @@ import StyledButton1 from "@/app/components/StyledButton1";
 
 const GiangVien = () => {
   return (
-    <div className="w-full h-screen flex justify-center items-center overflow-hidden">
+    <div className="w-full flex justify-center items-center py-24">
       <div className="w-full h-full relative rounded-t-2xl overflow-hidden">
         <div className="w-full h-full absolute top-0 left-0 z-10 overflow-hidden">
           <ImageOptimized
@@ -55,7 +55,7 @@ const GiangVien = () => {
           ></div>
         </div>
         <div className="w-full flex justify-center items-center">
-          <div className="w-10/12 h-full z-50 flex flex-col lg:flex-row items-center justify-between px-6 lg:px-8 py-8 lg:py-16 mx-auto gap-6 lg:gap-8">
+          <div className="max-w-6xl w-full h-full z-50 flex flex-col lg:flex-row items-center justify-center px-6 lg:px-8 py-8 lg:py-16 mx-auto gap-4 lg:gap-8 xl:gap-12">
             {/* Left content */}
             <div className="flex-1 flex flex-col justify-center text-center lg:text-left order-2 lg:order-1">
               <p className="text-white/80 text-sm lg:text-base leading-relaxed max-w-xs mx-auto lg:mx-0">

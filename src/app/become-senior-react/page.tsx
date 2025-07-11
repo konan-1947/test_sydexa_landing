@@ -14,6 +14,7 @@ import NhungGiBanSeHocDuoc from "./components/NhungGiBanSeHocDuoc";
 import EndScrollingLightSpots from "./components/EndScrollingLightSpots";
 import AnimatedPathSvg from "./components/AnimatedPathSvg";
 import ImageOptimized from "@/app/components/ImageOptimized";
+import IframeModelViewer from "./components/IframeModelViewer";
 
 const BecomeSeniorReactPage = () => {
   return (
@@ -27,7 +28,8 @@ const BecomeSeniorReactPage = () => {
             <Part1 />
           </div>
           <div className="absolute right-0 z-10 bottom-0 w-full h-full flex items-center justify-end overflow-visible">
-            <Model />
+            {/* <Model /> */}
+            <IframeModelViewer className="w-[1200px] h-[900px] max-w-none max-h-none" />
           </div>
         </div>
 
