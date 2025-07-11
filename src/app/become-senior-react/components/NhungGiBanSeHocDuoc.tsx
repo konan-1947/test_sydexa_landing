@@ -34,13 +34,12 @@ const CheckmarkIcon = () => (
 
 const NhungGiBanSeHocDuoc = () => {
     return (
-        <section className="relative bg-[#05001f] py-32 lg:py-40 px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-[#05001f] py-32 lg:py-40 px-4 lg:px-8">
             <div className="container mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
                     {/* Cột Trái: Nội dung văn bản */}
-                    {/* GIẢI PHÁP 1: Dịch cột VĂN BẢN sang phải bằng margin-right âm */}
-                    <div className="text-left relative z-10">
+                    <div className="text-left relative z-10 -ml-10">
                         <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-6">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="#a78bfa" >
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
@@ -65,7 +64,7 @@ const NhungGiBanSeHocDuoc = () => {
                     </div>
 
                     {/* Cột Phải: Hình ảnh mô phỏng VSCode */}
-                    <div className="relative w-full flex justify-center items-center">
+                    <div className="relative w-full flex justify-center items-center ml-20">
                         {/* Glow effect */}
                         <div className="absolute inset-0 z-0 flex justify-center items-center">
                             <div className="w-[90%] h-[90%] rounded-5xl blur-2xl bg-blue-500/30" />
