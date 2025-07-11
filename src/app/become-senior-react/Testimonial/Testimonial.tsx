@@ -82,17 +82,14 @@ const TestimonialComponent = () => {
   }
 
   return (
-    // Thay đổi: Thêm padding ngang cho container
     <div className="w-full py-20 testimonial-container px-4 sm:px-0">
       <Swiper
-        // Thay đổi: slidesPerView mặc định là 1.2
         slidesPerView={1.2}
         spaceBetween={16}
         loop={true}
         speed={800}
         autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
         breakpoints={{
-          // Thay đổi: breakpoint bắt đầu từ sm (640px)
           640: { slidesPerView: 2, spaceBetween: 20 },
           768: { slidesPerView: 3, spaceBetween: 30 },
           1024: { slidesPerView: 4, spaceBetween: 40 },
@@ -107,16 +104,15 @@ const TestimonialComponent = () => {
               <div
                 className="testimonial-item-wrapper h-full transition-all duration-500 ease-out"
                 style={{
-                  transform: isActive ? 'scale(1)' : 'scale(0.85)', // Thay đổi: scale cho active là 1, không active nhỏ hơn
+                  transform: isActive ? 'scale(1)' : 'scale(0.85)',
                   opacity: isActive ? 1 : 0.6,
-                  boxShadow: isActive
-                    ? `0 0 50px 8px ${item.glowColor}`
-                    : '0 10px 25px -10px rgba(0, 0, 0, 0.4)',
+                  // THAY ĐỔI 1: Xóa hoàn toàn thuộc tính boxShadow
                   borderRadius: '16px',
                 }}
               >
                 <div className={`p-[1.5px] rounded-2xl h-full bg-gradient-to-br ${item.gradient}`}>
-                  <div className="relative z-10 flex flex-col justify-between p-5 w-full h-full text-white bg-[#0D0A1B] rounded-[15px] min-h-[320px]">
+                  {/* THAY ĐỔI 2: Tăng độ đậm của gradient trắng */}
+                  <div className="relative z-10 flex flex-col justify-between p-5 w-full h-full text-white bg-[#0D0A1B] bg-gradient-to-tl from-white/25 to-transparent rounded-[15px] min-h-[320px]">
                     <p className="mb-6 text-base leading-relaxed line-clamp-7">
                       {item.content}
                     </p>

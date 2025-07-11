@@ -1,10 +1,8 @@
 // src/app/become-senior-react/components/LazyLoadModelViewer.tsx
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react'; // Thêm useCallback
-import { useGLTF } from '@react-three/drei';
-// Vui lòng đảm bảo đường dẫn này chính xác tới file hook của bạn
-import { useInView } from './useInView';
+import React, { useState, useEffect } from 'react';
+// Không cần useGLTF, useInView, useCallback nữa
 import ThreeModelViewer from './ThreeModelViewer';
 
 interface LazyLoadModelViewerProps {
@@ -18,34 +16,42 @@ const LazyLoadModelViewer = ({
     modelUrl,
     maskImageUrl,
 }: LazyLoadModelViewerProps) => {
-    // State này vẫn giữ nguyên
+    // State để theo dõi xem mô hình đã được kích hoạt để hiển thị hay chưa
     const [isActivated, setIsActivated] = useState(false);
 
-    // useInView hook vẫn giữ nguyên
-    const [containerRef, isInView] = useInView({ threshold: 0.1, once: true });
-
-    // --- CẢI TIẾN: Tạo một hàm kích hoạt duy nhất ---
-    // Sử dụng useCallback để tối ưu, đảm bảo hàm này không được tạo lại mỗi lần render
-    // trừ khi isActivated thay đổi.
-    const activateModel = useCallback(() => {
-        // Nếu đã được kích hoạt rồi, không làm gì cả để tránh xử lý thừa
-        if (isActivated) return;
-
-        // Luôn preload model trước khi hiển thị
-        useGLTF.preload(modelUrl);
-
-        // Kích hoạt hiển thị
-        setIsActivated(true);
-    }, [isActivated, modelUrl]); // Phụ thuộc vào isActivated và modelUrl
-
-    // useEffect bây giờ chỉ gọi hàm kích hoạt khi isInView
+    // --- CẢI TIẾN: Lắng nghe tương tác toàn cục trên trang ---
     useEffect(() => {
-        if (isInView) {
-            activateModel();
+        // Nếu đã được kích hoạt rồi, không cần làm gì nữa.
+        if (isActivated) {
+            return;
         }
-    }, [isInView, activateModel]);
 
-    // Nếu đã được kích hoạt, render component model thật (không thay đổi)
+        // Đây là hàm sẽ được gọi MỘT LẦN DUY NHẤT khi người dùng tương tác.
+        const handleFirstInteraction = () => {
+            // Kích hoạt việc hiển thị component model
+            setIsActivated(true);
+
+            // Rất quan trọng: Gỡ bỏ các event listener ngay sau khi chúng được kích hoạt
+            // để tránh việc hàm này bị gọi lại và gây ra xử lý thừa.
+            window.removeEventListener('mousemove', handleFirstInteraction);
+            window.removeEventListener('scroll', handleFirstInteraction);
+        };
+
+        // Thêm các event listener vào đối tượng `window` để bắt được tương tác ở bất kỳ đâu trên trang.
+        window.addEventListener('mousemove', handleFirstInteraction);
+        window.addEventListener('scroll', handleFirstInteraction);
+
+        // Hàm dọn dẹp (cleanup function) của useEffect:
+        // Sẽ được gọi khi component bị unmount (gỡ khỏi DOM).
+        // Điều này đảm bảo không bị rò rỉ bộ nhớ nếu component biến mất trước khi người dùng tương tác.
+        return () => {
+            window.removeEventListener('mousemove', handleFirstInteraction);
+            window.removeEventListener('scroll', handleFirstInteraction);
+        };
+    }, [isActivated]); // Effect này chỉ chạy lại khi `isActivated` thay đổi.
+
+    // Nếu đã được kích hoạt, render component model thật.
+    // Việc tải file .gltf sẽ bắt đầu từ đây, khi component này được mount.
     if (isActivated) {
         return (
             <ThreeModelViewer
@@ -55,22 +61,19 @@ const LazyLoadModelViewer = ({
         );
     }
 
-    // Nếu chưa, hiển thị mặt nạ.
-    // Thay vì gọi handleMouseEnter, chúng ta gọi trực tiếp hàm activateModel.
+    // Nếu chưa, hiển thị mặt nạ placeholder.
+    // Không cần ref, onMouseEnter, hay onClick nữa vì logic đã được chuyển lên useEffect.
     return (
         <div
-            ref={containerRef as React.RefObject<HTMLDivElement>}
-            onMouseEnter={activateModel} // Kích hoạt khi hover
-            onClick={activateModel} // Thêm onClick để kích hoạt trên thiết bị cảm ứng
-            className={`${className} cursor-pointer`}
+            className={className}
             style={{
                 backgroundImage: `url(${maskImageUrl})`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
             }}
-            aria-label="Tải mô hình 3D" // Thêm aria-label cho accessibility
-            role="button"
+            // Cập nhật aria-label để phản ánh đúng hành vi mới
+            aria-label="Mô hình 3D sẽ được tải khi bạn tương tác với trang"
         />
     );
 };
