@@ -1,7 +1,6 @@
 import DualScrollingLightSpots from "./components/DualScrollingLightSpots";
 import GiangVien from "./components/GiangVien";
 import Header from "./components/Header";
-// import Model from "./components/Model";
 import Part1 from "./components/Part1";
 import Part2 from "./components/Part2";
 import Syllabus from "./components/Syllabus";
@@ -14,68 +13,51 @@ import NhungGiBanSeHocDuoc from "./components/NhungGiBanSeHocDuoc";
 import EndScrollingLightSpots from "./components/EndScrollingLightSpots";
 import AnimatedPathSvg from "./components/AnimatedPathSvg";
 import ImageOptimized from "@/app/components/ImageOptimized";
-import IframeModelViewer from "./components/IframeModelViewer";
-import { isMobile } from 'react-device-detect'
-//import ThreeModelViewer from "./components/ThreeModelViewer";
+import ThreeModelViewer from "./components/ThreeModelViewer";
+// Không cần import isMobile cho layout nữa
 
 const BecomeSeniorReactPage = () => {
   return (
-    <div className="w-screen overflow-x-hidden"> {/* Đảm bảo chỉ ẩn overflow ngang */}
+    <div className="w-screen overflow-x-hidden">
 
-      {/* ===== BẮT ĐẦU PHẦN ĐƯỢC VIẾT LẠI ===== */}
-
-      {/* 
-        Container chính cho phần hero (màn hình đầu tiên).
-        - relative: Để định vị ảnh nền tuyệt đối bên trong nó.
-        - h-screen: Chiếm toàn bộ chiều cao màn hình.
-        - flex flex-col: Sắp xếp các phần tử con (Header và Nội dung chính) theo chiều dọc.
-      */}
       <div className="relative h-screen w-full flex flex-col">
-
-        {/* Ảnh nền được đặt ở lớp dưới cùng */}
         <ImageOptimized
           name="Bg1"
           priority
           size={500}
           quality={100}
           type="svg"
-          className="absolute inset-0 w-full h-full z-0 object-cover" // object-cover để ảnh lấp đầy
+          className="absolute inset-0 w-full h-full z-0 object-cover"
         />
-
-        {/* Header: Là một phần tử flex độc lập, không cần absolute */}
-        {/* z-20 để đảm bảo nó luôn ở trên cùng */}
         <div className="w-full z-20">
           <Header />
         </div>
 
-        {/* 
-          Nội dung chính:
-          - flex-grow: Đây là chìa khóa! Nó sẽ chiếm hết không gian dọc còn lại, đẩy Header lên trên.
-          - grid: Giữ lại cấu trúc grid responsive của bạn.
-          - z-10: Nằm trên ảnh nền nhưng dưới Header.
+        {/*
+          NỘI DUNG CHÍNH:
+          - Mặc định là flex-col cho mobile.
+          - Chuyển sang grid 2 cột cho desktop (lg).
         */}
-        <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 items-center z-10">
-          {/* Ô Nội dung (Bên trái) */}
-          <div className="px-6 sm:px-8 lg:px-12">
-            {/* Không cần pt-20 nữa vì layout đã được xử lý bằng flex-grow */}
+        <main className="flex-grow flex flex-col lg:grid lg:grid-cols-2 items-center z-10">
+          {/* Cột nội dung (Part1) */}
+          <div className="w-full h-full flex items-center justify-center lg:justify-start px-6 sm:px-8 lg:px-12">
             <Part1 />
           </div>
 
-          {/* Ô Mô hình 3D (Bên phải) */}
-          {isMobile ? null : (
-            <div className="hidden lg:block relative h-full">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                {/* <ThreeModelViewer className="w-[1500px] h-[1500px] max-w-none max-h-none" /> */}
-                <IframeModelViewer className="w-[1500px] h-[1500px] max-w-none max-h-none" />
-              </div>
+          {/* 
+            Cột mô hình 3D
+            - `hidden lg:block`: Ẩn hoàn toàn trên mobile, chỉ hiện trên desktop.
+              Đây là cách làm đúng của Tailwind, thay thế cho `isMobile`.
+          */}
+          <div className="hidden lg:relative lg:block h-full">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <ThreeModelViewer className="w-[1500px] h-[1500px] max-w-none max-h-none" />
             </div>
-          )}
-        </div>
-
+          </div>
+        </main>
       </div>
 
-      {/* ===== KẾT THÚC PHẦN ĐƯỢC VIẾT LẠI ===== */}
-
+      {/* --- PHẦN CÒN LẠI CỦA TRANG GIỮ NGUYÊN --- */}
       <AnimatedPathSvg />
       <Part2 />
       <div className="mt-32">
@@ -93,9 +75,7 @@ const BecomeSeniorReactPage = () => {
 
       <div className="relative w-full flex justify-center items-center -mt-40 -ml-65 mr-0 z-0">
         <EndScrollingLightSpots />
-        {/* Top fade gradient */}
         <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#05001f] to-transparent pointer-events-none z-10"></div>
-        {/* Bottom fade gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#05001f] to-transparent pointer-events-none z-10"></div>
       </div>
 

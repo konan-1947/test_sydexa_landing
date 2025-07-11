@@ -1,30 +1,49 @@
-// import BlurText from "@/animation/BlurText";
+// File: components/Part1.tsx
+
 import StyledButton1 from "@/app/components/StyledButton1";
 
 const Part1 = () => {
   return (
+    // CONTAINER CHÍNH
+    // - Mặc định (Mobile): flex, h-full.
     <div className="w-full h-full flex">
-      <div className="w-full h-3/4 pl-48 flex flex-col justify-center items-left gap-8">
+
+      {/* 
+        CONTAINER NỘI DUNG
+        - Mặc định (Mobile): Căn giữa (`items-center`), padding ngang nhỏ (`px-6`).
+        - Desktop (`lg:`): Áp dụng lại layout cũ của bạn: căn trái (`lg:items-start`), lề trái lớn (`lg:pl-48`), và bỏ padding ngang (`lg:px-0`).
+      */}
+      <div className="w-full h-full flex flex-col justify-center items-center lg:items-start gap-8 px-6 lg:px-0 lg:pl-48">
+
         <StyledButton1 text="Khoá học React" />
-        {/* <div className="text-[48px] font-semibold text-left ">
-          React Nâng Cao<br />Chuyên Sâu với Tối Ưu <br />Hiệu Năng
-        </div> */}
-        <h1 className="text-[48px] font-semibold text-left leading-tight">
-          {/* Dòng 1: Có màu gradient */}
-          <span className="block bg-gradient-to-r from-[#A7B3FF] to-white bg-clip-text text-transparent">
-            React Nâng Cao
+
+        {/* 
+          TIÊU ĐỀ H1
+          - Font size: `text-4xl` cho mobile, `lg:text-[48px]` cho desktop.
+          - Text align: `text-center` cho mobile, `lg:text-left` cho desktop.
+        */}
+        <h1 className="text-4xl lg:text-[48px] font-semibold text-left leading-tight text-center lg:text-left">
+
+          {/*
+            CÁC DÒNG TEXT
+            - Mặc định: là inline, nằm trên một hàng.
+            - Desktop (`lg:`): Thêm `lg:block` để mỗi span xuống một dòng như cũ.
+          */}
+          <span className="lg:block bg-gradient-to-r from-[#A7B3FF] to-white bg-clip-text text-transparent">
+            React Nâng Cao{' '}
           </span>
 
-          {/* Dòng 2 và 3: Màu trắng. Lưu ý: sẽ không nhìn thấy trên nền trắng */}
-          <span className="block text-white">
-            Chuyên Sâu với Tối Ưu
+          <span className="lg:block text-white">
+            Chuyên Sâu với Tối Ưu{' '}
           </span>
-          <span className="block text-white">
+
+          <span className="lg:block text-white">
             Hiệu Năng
           </span>
         </h1>
+
         <button
-          className="flex mt-12 cursor-pointer items-center justify-center text-[14px] text-white hover:opacity-90 transition-opacity w-fit h-fit px-4 py-2"
+          className="mt-4 lg:mt-12 cursor-pointer items-center justify-center text-[14px] text-white hover:opacity-90 transition-opacity w-fit h-fit px-6 py-3"
           style={{
             background: `linear-gradient(135deg, #5050DD 0%, #FC80B6 100%)`,
             borderRadius: "40px",
