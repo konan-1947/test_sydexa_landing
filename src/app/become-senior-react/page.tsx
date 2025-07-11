@@ -58,7 +58,6 @@ const BecomeSeniorReactPage = () => {
               <LazyLoadModelViewer
                 className="w-[1500px] h-[1500px] max-w-[1200px] max-h-[1200px]"
                 modelUrl="/images/model27.glb"
-                maskImageUrl="/images/mask_model.png"
               />
 
             </div>
